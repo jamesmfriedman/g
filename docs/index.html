@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="G.docs">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>G: An Angular Component Libary</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script type="text/javascript" src="/docs.js"></script>
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    </head>
+    <body>
+        <g-tabs class="lg main-nav">
+            <a class="g-tab" ui-sref-active="active" ui-sref="home">Home</a>
+            <a class="g-tab" ui-sref-active="active" ui-sref="components">Components</a>
+            <g-tab ui-sref-active="active">Two</g-tab>
+            <g-tab ui-sref-active="active" ng-class="{active: tester}">Three</g-tab>
+        </g-tabs>
+
+        <div id="content" ui-view>
+            
+        </div>
+    </body>
+</html>

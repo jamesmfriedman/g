@@ -1,0 +1,138 @@
+$g-tooltip-color-bg: rgba(0,0,0,.9);
+$g-tooltip-arrow-size: 8px;
+
+.g-tooltip-overlay {
+	background: rgba(0,0,0,.9);
+	color: white;
+	border-radius: $g-border-radius;
+	border: 1px solid $g-tooltip-color-bg;
+	box-shadow: 0 0 3px rgba(0,0,0,.2);
+	display: block;
+	padding: $g-size-md / 4;
+	min-width: $g-size-lg;
+	text-align: center;
+	z-index: 1;
+	transition: top .1s, left .1s;
+
+	&.g-tooltip-overlay-has-origin {
+		position: fixed;
+
+		&:before {
+			content: '';
+			display: block;
+			width:0;
+			border: $g-tooltip-arrow-size solid $g-tooltip-color-bg;
+			position: absolute;
+			transition: top .1s, left .1s, bottom .1s, right .1s;
+		}
+	}
+
+	/****************************************************************************
+	 * Side
+	 ****************************************************************************/
+	&.x-bottom {
+		margin-top: 8px;
+
+		&:before {
+			border-right-color: transparent;
+			border-top-color: transparent;
+			border-left-color: transparent;
+			top: -$g-tooltip-arrow-size * 2;
+		}
+	}
+
+	&.x-right {
+		margin-left: 8px;
+		
+		&:before {
+			border-left-color: transparent;
+			border-top-color: transparent;
+			border-bottom-color: transparent;
+			left: -$g-tooltip-arrow-size * 2;
+		}
+	}
+
+	&.x-left {
+		margin-left: -8px;
+
+		&:before {
+			border-right-color: transparent;
+			border-top-color: transparent;
+			border-bottom-color: transparent;
+			right: -$g-tooltip-arrow-size * 2;
+		}
+	}
+
+	&.x-center {
+		&:before {
+			opacity:0;
+		}
+	}
+
+	&.x-top {
+		margin-top: -8px;
+
+		&:before {
+			border-right-color: transparent;
+			border-bottom-color: transparent;
+			border-left-color: transparent;
+			bottom: -$g-tooltip-arrow-size * 2;
+		}
+	}
+
+	/****************************************************************************
+	 * Position
+	 ****************************************************************************/
+	&.y-center.x-top, &.y-center.x-bottom {
+		&:before {
+			left: calc(50% - #{$g-tooltip-arrow-size});
+		}
+	}
+
+	&.y-center.x-right, &.y-center.x-left {
+		&:before {
+			top: calc(50% - #{$g-tooltip-arrow-size});
+		}
+	}
+
+	&.y-left {
+		&:before {
+			left: $g-tooltip-arrow-size;
+		}
+	}
+
+	&.y-right {
+		&:before {
+			right: $g-tooltip-arrow-size;
+		}
+	}
+
+	&.y-top {
+		&:before {
+			bottom: $g-tooltip-arrow-size;
+		}
+	}
+
+	&.y-bottom {
+		&:before {
+			top: $g-tooltip-arrow-size;
+		}
+	}
+
+	/***
+	 * Animations
+	 */
+	&.#{$g-animate-classname} {
+		&.ng-enter, &.ng-leave {
+			transition: opacity .2s;
+		}
+
+		&.ng-enter, &.ng-leave.ng-leave-active { 
+			opacity: 0; 
+		}
+		
+		&.ng-leave, &.ng-enter.ng-enter-active { 
+			opacity: 1 ;
+		}
+	}
+}

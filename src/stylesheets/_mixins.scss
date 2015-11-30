@@ -1,0 +1,23 @@
+@mixin g-text-color() {
+	color: rgba(0,0,0,.8);
+
+	&.secondary {
+		color: rgba(0,0,0,.5);
+	}
+
+	&.tertiary {
+		color: rgba(0,0,0,.3);
+	}
+
+	&.inverse {
+		color: rgba(255,255,255,.8);
+
+		&.secondary {
+			color: rgba(255,255,255,.5);
+		}
+
+		&.tertiary {
+			color: rgba(255,255,255,.3);
+		}
+	}
+}

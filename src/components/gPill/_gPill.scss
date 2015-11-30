@@ -1,0 +1,32 @@
+@mixin g-pill-mixin($color, $background-color, $border-color) {
+	color: $color;
+	background-color: $background-color;
+	border-color: $border-color;
+}
+
+.g-pill {
+	padding: calc((#{$g-size-sm} - 3.5rem * 1.5) / 2 - 1px) 3rem;
+	display: inline-block;
+	font-size: 3.5rem;
+	line-height: 1.5;
+	border: 1px solid transparent;
+	font-weight: 600;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 999px;
+
+	@include g-pill-mixin($g-color-default-text, $g-color-default-bg, $g-color-default-border);
+
+	&.primary {
+		@include g-pill-mixin($g-color-primary-text, $g-color-primary-bg, $g-color-primary-border);
+	}
+
+	&.danger {
+		@include g-pill-mixin($g-color-danger-text, $g-color-danger-bg, $g-color-danger-border);
+	}
+
+	&.success {
+		@include g-pill-mixin($g-color-success-text, $g-color-success-bg, $g-color-success-border);
+	}
+
+}

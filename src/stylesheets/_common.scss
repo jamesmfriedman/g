@@ -1,0 +1,15 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: $g-rem-size;
+}
+
+.block {
+	display: block;
+}
+
+.container {
+	padding: 0 $g-size-md;
+}

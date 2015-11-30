@@ -1,0 +1,17 @@
+[g-icon] {
+	@include g-text-color;
+
+	font-size: 6rem;
+	vertical-align: middle;
+	display: inline-block;
+	width: 6rem;
+	height: 6rem;
+	line-height: 1;
+	text-align: center;
+
+	&.lg {
+		font-size: 12rem;
+		width: 12rem;
+		height: 12rem;
+	}
+}

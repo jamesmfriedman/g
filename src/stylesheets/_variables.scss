@@ -1,0 +1,32 @@
+$g-rem-size: 4px !default;
+$g-animate-classname: 'animate' !default;
+$g-border-radius: .625rem !default;
+
+$g-size-xs: 6rem !default;
+$g-size-sm: 8rem !default;
+$g-size-md: 10rem !default;
+$g-size-lg: 14rem !default;
+
+$g-color-default-border: rgba(0,0,0,.2) !default;
+$g-color-default-bg: white !default;
+$g-color-default-text: rgba(0,0,0,.8) !default; 
+
+$g-color-inverse-border: #333 !default;
+$g-color-inverse-bg: #333 !default;
+$g-color-inverse-text: white !default; 
+
+$g-color-primary-border: #03A8F2 !default;
+$g-color-primary-bg: #03A8F2 !default;
+$g-color-primary-text: white !default;
+
+$g-color-danger-border: #F34235 !default;
+$g-color-danger-bg: #F34235 !default;
+$g-color-danger-text: white !default;
+
+$g-color-success-border: #4BAE4F !default;
+$g-color-success-bg: #4BAE4F !default;
+$g-color-success-text: white !default;
+
+$g-color-highlight: #03A8F2 !default;
+
+$g-easing-outBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);

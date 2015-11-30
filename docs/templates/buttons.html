@@ -1,0 +1,51 @@
+<div class="docs-header">
+    <h1 class="text-display-1">Buttons</h1>
+</div>
+
+<div class="container">
+    <g-btn class="primary" ng-click="tester=!tester"><i g-icon="heart" class="secondary"></i><span>Favorite</span></g-btn>
+    <g-btn>Click Me</g-btn>
+
+    <g-btn class="primary lg" g-tooltip title="foo"><i g-icon="plus" class="secondary inverse"></i><span>Favorite</span></g-btn>
+    <g-btn class="lg round" g-tooltip title="foo">Click Me</g-btn>
+
+    <g-btn class="lg alt" ng-click="removeDropdown = !removeDropdown">REMOVE DROPDOWN</g-btn>
+
+    <g-btn-group>
+        <g-btn>One</g-btn>
+        <g-btn>Two</g-btn>
+        <g-btn>Three</g-btn>
+    </g-btn-group>
+
+    <g-btn-group class="g-btn-group-vertical">
+        <g-btn>One</g-btn>
+        <g-btn>Two</g-btn>
+        <g-btn>Three</g-btn>
+    </g-btn-group>
+
+    <span ng-if="!removeDropdown">
+    <g-btn ng-init="makeFavorite = false" g-dropdown-toggle="dropper" class="round"><i g-icon="heart" class="secondary"></i></g-btn>
+    <g-dropdown ng-if="makeFavorite" api="dropper" ng-cloak>
+        <g-menu-list>
+            <g-menu-list-item>Favorite</g-menu-list-item>
+            <g-menu-list-item>Share</g-menu-list-item>
+            <g-menu-list-item>Save</g-menu-list-item>
+            <g-menu-list-item>Remove</g-menu-list-item>
+        </g-menu-list>
+    </g-dropdown>
+    </span>
+
+    <g-btn ng-init="makeFavorites = false" g-popover-toggle="dropper2" class="round"><i g-icon="star" class="secondary"></i></g-btn>
+    <g-popover ng-show="makeFavorites" params="{position: 'top center'}" api="dropper2">
+        <g-menu-list>
+            <g-menu-list-item>Favorite</g-menu-list-item>
+            <g-menu-list-item>Share</g-menu-list-item>
+            <g-menu-list-item>Save</g-menu-list-item>
+            <g-menu-list-item>Remove adf adf akjdfh kadfhkj ahdfkjah dkfh akjdfh kajdhfkj ahdkjf</g-menu-list-item>
+        </g-menu-list>
+    </g-popover>
+
+    <g-btn class="lg alt"><i g-icon="heart" class="secondary"></i></g-btn>
+    <g-btn class="lg"><i g-icon="heart" class="secondary"></i></g-btn>
+
+</div>

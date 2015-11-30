@@ -1,0 +1,80 @@
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin:0;
+}
+
+.text-display-4 {
+    font-size: 112px;
+    font-weight: 300;
+    line-height: 128px;
+    letter-spacing: -5px;
+    @include g-text-color();
+}
+
+.text-display-3 {
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 64px;
+    @include g-text-color();
+}
+
+.text-display-2 {
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 64px;
+    @include g-text-color();
+}
+
+.text-display-1 {
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 52px;
+    @include g-text-color();
+}
+
+.text-headline {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 44px;
+    @include g-text-color();
+}
+
+.text-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 44px;
+    @include g-text-color();
+}
+
+.text-subhead {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    @include g-text-color();
+}
+
+.text-body {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 25px;
+    @include g-text-color();
+}
+
+.text-caption {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 32px;
+    @include g-text-color();
+}
+
+.text-menu {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 32px;
+    @include g-text-color();
+}

@@ -1,0 +1,69 @@
+.g-tabs {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;	
+
+	// horizontal tabs
+	&:not(.g-tabs-vertical) {
+		text-align: center;	
+		border-bottom: 1px solid $g-color-default-border;
+	}
+
+	// vertical tabs
+	&.g-tabs-vertical {
+		text-align: left;
+		border-left: 1px solid $g-color-default-border;
+		
+		.g-tab {
+			display: block;
+		}
+	}
+
+	&.lg .g-tab {
+		height: $g-size-lg;
+		line-height: $g-size-lg;
+		padding: 0 $g-size-lg / 2;
+	}
+
+	&.alt .g-tab {
+		text-transform: none;
+		letter-spacing: 0;
+		font-weight: normal;
+		font-size: 3.5rem;
+		height: $g-size-sm;
+		line-height: $g-size-sm;
+	}
+}
+
+.g-tab {
+	display: inline-block;
+	vertical-align: middle;
+	height: $g-size-md;
+	line-height: $g-size-md;
+	padding: 0 $g-size-md / 2;
+	cursor: pointer;
+	transition: .3s;
+	color: inherit;
+
+	text-decoration: none;
+	letter-spacing: .25rem;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 3rem;
+	opacity: .5;
+
+	&.active {
+		opacity: 1;
+	}
+}
+
+.g-tab-highlight {
+	transition: .3s;
+	position: absolute;
+	bottom:-1px;
+	height: .25rem;
+	width: .25rem;
+	background-color: $g-color-highlight;
+	left:-1px;
+	visibility: hidden;
+}

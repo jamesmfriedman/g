@@ -1,0 +1,7 @@
+<div class="components">
+    <g-tabs class="g-tabs-vertical alt">
+        <a ng-repeat="(key, route) in componentRoutes track by key" class="g-tab" ui-sref="{{ ::'components.' + key }}" ui-sref-active="active">{{ ::route.name }}</a>
+    </g-tabs>
+
+    <ui-view></ui-view>
+</div>
