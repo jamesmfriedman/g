@@ -13,7 +13,7 @@ if (process.argv.indexOf('--host') != -1) {
 var config = module.exports = {
 	context: __dirname,
 	entry: {
-		'dist/g': './src/g.js',
+		'dist/g': ['./src/g.js'],
 		'docs/docs': './src/docs/docs.js'
 	},
 	output: {

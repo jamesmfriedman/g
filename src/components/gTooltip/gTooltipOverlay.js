@@ -1,4 +1,4 @@
-angular.module('G.tooltip').directive('gTooltipOverlay', function(gOverlayBase) {
+angular.module('G.tooltip').directive('gTooltipOverlay', function(gOverlayDirectiveBase) {
 
-	return gOverlayBase('tooltip-overlay', 'swap');
+	return gOverlayDirectiveBase('tooltip-overlay', 'swap', ['top', 'center']);
 });

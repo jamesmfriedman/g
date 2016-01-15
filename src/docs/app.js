@@ -1,8 +1,10 @@
 var hosts = ['git.empdev.domo.com'];
 var app = angular.module('G.docs', [
 	'ngAnimate',
+	'ngSanitize',
 	'ui.router',
-	'G'
+	'G',
+	'G.docs.controllers'
 ]);
 
 var IS_DEV = hosts.indexOf(window.location.hostname) == -1;
@@ -14,6 +16,8 @@ app.config(function($locationProvider, $provide, $compileProvider, $animateProvi
 
 	$animateProvider.classNameFilter(/animate/);
 	gConfigProvider.iconPrefix('fi-');
+	//gConfigProvider.useNativeNotifications(false);
+	gConfigProvider.defaultNotificationIcon('/img/favicon.png');
 
 	// this allows support for a dynamic basehref so the guide can run on github pages
 	$provide.decorator('$browser', function($delegate) {
@@ -45,8 +49,8 @@ app.config(function($locationProvider, $provide, $compileProvider, $animateProvi
 /**
  * Controls the main app frame
  */
-app.run(function($rootScope, $location, $browser, $sce) {
-
+app.run(function($rootScope) {
+		
 	// kills the 300ms delay for touch events on mobile
 	//FastClick.attach(document.body);
 

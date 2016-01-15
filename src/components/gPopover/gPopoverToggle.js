@@ -25,7 +25,6 @@ angular.module('G.popover').directive('gPopoverToggle', function(gMixins, $docum
 				scope.$apply();
 
 				if (popoverEl) {
-					console.log('testing');
 					popoverEl.off('mouseleave', hide);
 					popoverEl = null;
 				}
@@ -33,8 +32,8 @@ angular.module('G.popover').directive('gPopoverToggle', function(gMixins, $docum
 
 			var hide = function(evt) {
 				var toEl = angular.element(evt.toElement);
-				
-				if (toEl.attr('api') === attrs.gPopoverToggle) {
+
+				if (toEl.attr('as') === attrs.gPopoverToggle) {
 					popoverEl = toEl;
 					popoverEl.one('mouseleave', hide);
 					return;

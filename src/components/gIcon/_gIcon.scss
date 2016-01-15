@@ -1,13 +1,32 @@
 [g-icon] {
-	@include g-text-color;
-
-	font-size: 6rem;
+	@include g-text-styles;
 	vertical-align: middle;
 	display: inline-block;
-	width: 6rem;
-	height: 6rem;
 	line-height: 1;
 	text-align: center;
+
+	font-size: 6rem;
+	width: 6rem;
+	height: 6rem;
+
+	&.xs {
+		font-size: 4.5rem;
+		width: 4.5rem;
+		height: 4.5rem;		
+	}
+
+	&.sm {
+		font-size: 6rem;
+		width: 6rem;
+		height: 6rem;		
+	}
+
+	&.md {
+		font-size: 8rem;
+		width: 8rem;
+		height: 8rem;		
+	}
+	
 
 	&.lg {
 		font-size: 12rem;

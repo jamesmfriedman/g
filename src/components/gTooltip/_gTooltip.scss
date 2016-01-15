@@ -13,9 +13,11 @@ $g-tooltip-arrow-size: 8px;
 	text-align: center;
 	z-index: 1;
 	transition: top .1s, left .1s;
+	opacity: 0;
 
 	&.g-tooltip-overlay-has-origin {
 		position: fixed;
+		opacity: 1;
 
 		&:before {
 			content: '';

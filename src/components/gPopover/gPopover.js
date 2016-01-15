@@ -1,4 +1,4 @@
-angular.module('G.popover').directive('gPopover', function(gOverlayBase) {
+angular.module('G.popover').directive('gPopover', function(gOverlayDirectiveBase) {
 
-	return gOverlayBase('popover', 'swapWithCenter');
+	return gOverlayDirectiveBase('popover', 'swapWithCenter', ['top', 'center']);
 });

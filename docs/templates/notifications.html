@@ -1,0 +1,17 @@
+<div class="docs-header">
+    <h1 class="text-display-1">Notifications</h1>
+</div>
+
+<div class="container">
+
+    <g-notification ng-click="notificationsCtrl.requestIt()" ng-if="notificationsCtrl.n.nativePermission === 'denied'" params="{title: ':( Native Notifications Are Disabled', body: 'Request Access Again.'}"></g-notification>
+
+    <g-notification ng-click="notificationsCtrl.requestIt()" ng-if="notificationsCtrl.n.nativePermission === 'granted'" params="{title: ':) Native Notifications Are Working!', body: 'You will receive native notifications.'}"></g-notification>
+
+    <g-notification ng-if="foo" params="{title: 'ngIf', 'body': 'foo'}"></g-notification>
+
+    <br><br>
+    <g-btn ng-click="foo = !foo">{{ !foo ? 'Show' : 'Hide' }} Notification</g-btn>
+    <g-btn ng-click="notificationsCtrl.testClient()">Test Client</g-btn>
+    <g-btn ng-click="notificationsCtrl.testNative()">Test Native</g-btn>
+</div>

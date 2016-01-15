@@ -1,3 +1,3 @@
-angular.module('G.dropdown').directive('gDropdown', function(gOverlayBase) {
-	return gOverlayBase('dropdown');
+angular.module('G.dropdown').directive('gDropdown', function(gOverlayDirectiveBase) {
+	return gOverlayDirectiveBase('dropdown');
 });

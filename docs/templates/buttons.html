@@ -3,49 +3,81 @@
 </div>
 
 <div class="container">
-    <g-btn class="primary" ng-click="tester=!tester"><i g-icon="heart" class="secondary"></i><span>Favorite</span></g-btn>
-    <g-btn>Click Me</g-btn>
+    <g-btn ng-class="{'loading': clicked}" class="primary"><i g-icon="heart" class="secondary"></i><span>Favorite</span></g-btn>
+    <g-btn ng-click="clicked=!clicked" ng-class="{'loading': clicked}">Click Me</g-btn>
 
     <g-btn class="primary lg" g-tooltip title="foo"><i g-icon="plus" class="secondary inverse"></i><span>Favorite</span></g-btn>
     <g-btn class="lg round" g-tooltip title="foo">Click Me</g-btn>
 
-    <g-btn class="lg alt" ng-click="removeDropdown = !removeDropdown">REMOVE DROPDOWN</g-btn>
+    <div ng-click="following = !following" g-toggle="following">
+        <g-btn state="off"      class="block flat">Follow</g-btn>
+        <g-btn state="on"       class="block success flat">Following</g-btn>
+        <g-btn state="action"   class="block danger">Unfollow</g-btn>    
+    </div>
+        
+    
 
-    <g-btn-group>
-        <g-btn>One</g-btn>
-        <g-btn>Two</g-btn>
-        <g-btn>Three</g-btn>
-    </g-btn-group>
+    <g-btn class="block">Block</g-btn>
 
-    <g-btn-group class="g-btn-group-vertical">
-        <g-btn>One</g-btn>
-        <g-btn>Two</g-btn>
-        <g-btn>Three</g-btn>
-    </g-btn-group>
+    <section>
+        <h2 class="text-headline">Button Groups</h2>
+        <g-btn-group>
+            <g-btn>One</g-btn>
+            <g-btn>Two</g-btn>
+            <g-btn>Three</g-btn>
+        </g-btn-group>
 
-    <span ng-if="!removeDropdown">
-    <g-btn ng-init="makeFavorite = false" g-dropdown-toggle="dropper" class="round"><i g-icon="heart" class="secondary"></i></g-btn>
-    <g-dropdown ng-if="makeFavorite" api="dropper" ng-cloak>
-        <g-menu-list>
-            <g-menu-list-item>Favorite</g-menu-list-item>
-            <g-menu-list-item>Share</g-menu-list-item>
-            <g-menu-list-item>Save</g-menu-list-item>
-            <g-menu-list-item>Remove</g-menu-list-item>
-        </g-menu-list>
-    </g-dropdown>
-    </span>
+        <g-btn-group class="g-btn-group-vertical">
+            <g-btn>One</g-btn>
+            <g-btn>Two</g-btn>
+            <g-btn>Three</g-btn>
+        </g-btn-group>
+    </section>
 
-    <g-btn ng-init="makeFavorites = false" g-popover-toggle="dropper2" class="round"><i g-icon="star" class="secondary"></i></g-btn>
-    <g-popover ng-show="makeFavorites" params="{position: 'top center'}" api="dropper2">
-        <g-menu-list>
-            <g-menu-list-item>Favorite</g-menu-list-item>
-            <g-menu-list-item>Share</g-menu-list-item>
-            <g-menu-list-item>Save</g-menu-list-item>
-            <g-menu-list-item>Remove adf adf akjdfh kadfhkj ahdfkjah dkfh akjdfh kajdhfkj ahdkjf</g-menu-list-item>
-        </g-menu-list>
-    </g-popover>
+    <section>
+        <h2 class="text-headline">States</h2>
+        <g-btn>Default</g-btn>
+        <g-btn class="primary">Primary</g-btn>
+        <g-btn class="success">Success</g-btn>
+        <g-btn class="danger">Danger</g-btn>
+        <br/>
+        
+        <g-btn class="alt">Default</g-btn>
+        <g-btn class="primary alt">Primary</g-btn>
+        <g-btn class="success alt">Success</g-btn>
+        <g-btn class="danger alt">Danger</g-btn>
+        <br/>
 
-    <g-btn class="lg alt"><i g-icon="heart" class="secondary"></i></g-btn>
-    <g-btn class="lg"><i g-icon="heart" class="secondary"></i></g-btn>
+        <g-btn class="flat">Default</g-btn>
+        <g-btn class="primary flat">Primary</g-btn>
+        <g-btn class="success flat">Success</g-btn>
+        <g-btn class="danger flat">Danger</g-btn>
+
+        <div style="background-color:black;padding:20px;">
+            <g-btn class="inverse">Default</g-btn>
+            <g-btn class="inverse alt">Primary</g-btn>
+            <g-btn class="inverse flat">Success</g-btn>
+        </div>
+
+    </section>
+
+    <section>
+        
+
+        <h2 class="text-headline">Icon Buttons</h2>
+        <g-btn ng-init="makeFavorites = false" class="round"><i g-icon="star" class="secondary"></i></g-btn>
+        <g-btn class="lg alt"><i g-icon="heart" class="secondary"></i></g-btn>
+        <g-btn class="lg" g-popover-toggle="dropper2"><i g-icon="heart" class="secondary"></i></g-btn>
+
+         <g-popover ng-if="dropper2.showing" as="dropper2">
+            <g-menu-list>
+                <g-menu-list-item>Favorite</g-menu-list-item>
+                <g-menu-list-item>Share</g-menu-list-item>
+                <g-menu-list-item>Save</g-menu-list-item>
+                <g-menu-list-item>Remove</g-menu-list-item>
+            </g-menu-list>
+        </g-popover>
+
+    </section>
 
 </div>

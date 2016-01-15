@@ -6,7 +6,7 @@ var gComponentRoutes = {
 	'tabs' : {name: 'Tabs'},
 	'labels' : {name: 'Labels'},
 	'forms' : {name: 'Forms'},
-	'notifications' : {name: 'Notifications'},
+	'notifications' : {name: 'Notifications', controller: 'NotificationsController', controllerAs: 'notificationsCtrl'},
 	'breadcrumbs' : {name: 'Breadcrumbs'},
 	'progress' : {name: 'Progress'},
 	'pagination' : {name: 'Pagination'},
@@ -34,11 +34,20 @@ angular.module('G.docs').config(function($stateProvider, $urlRouterProvider){
 	// add in component routes
 	for (routeName in gComponentRoutes) {
 		var route = gComponentRoutes[routeName];
-
-		$stateProvider.state('components.' + routeName, {
+		var config = {
 			url: '/' + routeName, 
 			templateUrl: '/templates/'+ routeName +'.html'
-		});
+		};
+
+		if (route.controller) {
+			config.controller = route.controller;
+		}
+
+		if (route.controllerAs) {
+			config.controllerAs = route.controllerAs;
+		}
+
+		$stateProvider.state('components.' + routeName, config);
 	}
 
 

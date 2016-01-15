@@ -1,4 +1,4 @@
-angular.module('G.dropdown').directive('gDropdownToggle', function(gMixins, $document) {
+angular.module('G.dropdown').directive('gDropdownToggle', function($document) {
 	return {
 		restrict: 'A',
 		link: function(scope, el, attrs) {

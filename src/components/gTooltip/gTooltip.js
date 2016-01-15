@@ -3,20 +3,20 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $rootScope)
 		restrict: 'A',
 
 		link: function(scope, el, attrs) {
-			var api = 'tooltip_' + Math.round(Math.random() * 10000 + Date.now());
-			var show = 'show_' + api;
+			var as = 'tooltip_' + Math.round(Math.random() * 10000 + Date.now());
+			var show = as + '.showing';
 			var title = attrs.title || attrs.gTooltip;
 			el.attr('title', '');
 
-			$compile('<g-tooltip-overlay class="g-tooltip-overlay" params="{position: \'top center \', positionMode: \'swap\'}" ng-if="'+ show +'" api="'+ api +'">' + title + '</g-tooltip-overlay>')(scope);
+			$compile('<g-tooltip-overlay class="g-tooltip-overlay" params="{positionMode: \'swap\'}" ng-if="'+ show +'" as="'+ as +'">' + title + '</g-tooltip-overlay>')(scope);
 				
 			var show = function() {
-				scope[api].show(el);
+				scope[as].show(el);
 				$rootScope.$apply();
 			};
 
 			var hide = function() {
-				scope[api].hide(el);
+				scope[as].hide(el);
 				$rootScope.$apply();
 			};
 

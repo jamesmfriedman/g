@@ -1,4 +1,12 @@
-@mixin g-text-color() {
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin g-text-styles() {
 	color: rgba(0,0,0,.8);
 
 	&.secondary {
@@ -19,5 +27,13 @@
 		&.tertiary {
 			color: rgba(255,255,255,.3);
 		}
+	}
+
+	&.bold {
+		font-weight: bold;
+	}
+
+	&.italic {
+		font-style: italic;
 	}
 }

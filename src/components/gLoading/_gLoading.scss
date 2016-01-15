@@ -1,0 +1,93 @@
+@keyframes loading {
+	0%,
+	80%,
+	100% {
+		box-shadow: 4rem 0 0 -1.5rem, 10rem 0 0 -1.5rem, 16rem 0 0 -1.5rem;
+		opacity: .5;
+	}
+	12% {
+		box-shadow: 4rem 0 0 -.75rem, 10rem 0 0 -1.5rem, 16rem 0 0 -1.5rem;
+	}	
+	24% {
+		box-shadow: 4rem 0 0 0, 10rem 0 0 -.75rem, 16rem 0 0 -1.5rem;
+	}
+	36% {
+		box-shadow: 4rem 0 0 0, 10rem 0 0 0, 16rem 0 0 -.75rem;
+		opacity: 1;
+	}
+
+	48% {
+		box-shadow: 4rem 0 0 -.75rem, 10rem 0 0 0, 16rem 0 0 0;
+		opacity: 1;
+	}	
+	60% {
+		box-shadow: 4rem 0 0 -1.5rem, 10rem 0 0 -.75rem, 16rem 0 0 0;
+	}
+	72% {
+		box-shadow: 4rem 0 0 -1.5rem, 10rem 0 0 -1.5rem, 16rem 0 0 -.75rem;
+	}
+}
+
+@keyframes loading-dot {
+	0%,
+	100% {
+		box-shadow: 4rem 0 0 -1.5rem;
+		opacity: .5;
+	}
+	
+	50% {
+		box-shadow: 4rem 0 0 0;
+		opacity: 1;
+	}
+}
+
+
+
+g-loader, .loading:after {
+	border-radius: 50%;
+	width: 4rem;
+	height: 4rem;
+	box-shadow: 4rem 0 0 -1.5rem;
+	animation-fill-mode: both;
+	animation: loading 1.2s infinite linear;
+	color: $g-color-primary-bg;
+}
+
+g-loader {
+	margin-left:-4rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.loading:after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	content: '';
+	margin-left:-12rem;
+	transform: translateY(-50%);
+}
+
+g-loader.sm, .loading-sm:after {
+	animation: loading-dot 1.4s infinite ease-in-out;
+}
+
+.loading-sm:after {
+	margin-left: -4rem;
+}
+
+
+// buttons
+g-btn.loading {
+	padding-right: 8rem;
+
+	&:after {
+		left: auto;
+		right: 6.25rem;
+		animation: loading-dot 1.4s infinite ease-in-out;
+	}
+
+	&.primary:after {
+		color:white;
+	}
+}

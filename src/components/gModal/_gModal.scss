@@ -1,4 +1,86 @@
+body {
+	&:after {
+		opacity:0;
+		content:'';
+		position: fixed;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		z-index: 1;
+		background: rgba(0,0,0,.5);
+		pointer-events: none;
+		transition: opacity .3s;
+	}
+
+	&.g-modal-open {
+		overflow:hidden;
+
+		&:after {
+			opacity: 1;
+			bottom:0;
+			transition: opacity .3s; 
+			pointer-events: all;
+		}
+	}
+}
+
+
+
 g-modal {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	background: white;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	max-height: 80vh;
+	max-width: 80vw;
+	box-shadow: 1px 1px 20px 2px rgba(0,0,0,.07);
+	border-radius: $g-border-radius;
 
+	&.#{$g-animate-classname} {
+		&.ng-enter, &.ng-leave, &.ng-hide-add, &.ng-hide-remove {
+			transition: .3s;
+		}
 
+		&.ng-enter, &.ng-leave.ng-leave-active, &.ng-hide-remove, &.ng-hide-add.ng-hide-add-active {
+			opacity: 0;
+			transform: translate(-50%, -45%);
+		}
+
+		&.ng-enter.ng-enter-active, &.ng-leave, &.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active {
+			opacity: 1;
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+
+g-modal-header {
+	display: block;
+	padding: $g-size-xs $g-size-xs ($g-size-xs / 3) $g-size-xs;
+	flex: 0 0 auto;
+
+	[g-modal-hide] {
+		position: absolute;
+		top: $g-size-xs;
+		right: $g-size-xs;
+	}
+}
+
+g-modal-body {
+	display: block;
+	padding: ($g-size-xs / 3) $g-size-xs;
+	flex: 1;
+	overflow-y: auto;
+}
+
+g-modal-footer {
+	display: block;
+	padding: $g-size-xs;
+	flex: 0 0 auto;
+	@include clearfix;
 }

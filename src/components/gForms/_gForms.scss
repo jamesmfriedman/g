@@ -1,9 +1,15 @@
 .g-input {
 	border: 1px solid $g-color-default-border;
 	border-radius: $g-border-radius;
+	background-color: white;
 	outline: none;
 	transition: .3s;
 	vertical-align: middle;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	     -o-appearance: none;
+	        appearance: none;
 
 	&:focus {
 		//box-shadow: 0 0 3px $g-color-highlight;
@@ -11,20 +17,31 @@
 	}
 }
 
-.g-input-text, .g-input-textarea {
-	text-indent: 1.5rem;
+.g-input-text, .g-input-textarea, .g-input-select {
+	padding-left: 2rem;
+	padding-right: 2rem;
 }
 	
-.g-input-text {
+.g-input-text, .g-input-select {
 	height: $g-size-md;
 	line-height: $g-size-md;
-	text-indent: 1.5rem;
-	width: 30rem;
+	width: 60rem;
 }
 
 .g-input-textarea {
 	vertical-align: top;
-	padding-top: ($g-size-md - 1.75rem) / 2;
-	height: 10rem;
+	padding-top: ($g-size-md - 3.75rem * 1.5) / 2;
+	padding-bottom: ($g-size-md - 3.75rem * 1.5) / 2;
+	line-height: 1.5;
 	width: 60rem;
+}
+
+.g-form-label {
+	@include text-label;
+	margin-bottom: 2rem;
+	display: block;
+	padding-left: 2rem;
+	whitespace: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

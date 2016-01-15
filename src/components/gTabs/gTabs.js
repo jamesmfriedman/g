@@ -1,114 +1,131 @@
-angular.module('G.tabs').directive('gTabs', function($window) {
+angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout) {
 	return {
 		restrict: 'E',
 		scope: {},
-		link: function(scope, el, attrs) {
-			el.addClass('g-tabs');
-		
-			var tabs;
-			var observer;
-			var highlight = angular.element('<g-tab-highlight class="g-tab-highlight"></g-tab-highlight>');
-			var currentTab;
-			el.append(highlight);
+		compile: function(tEl, tAttrs) {
+
+			return function(scope, el, attrs, ctrl) {
+				gHelpers.directiveApiLink(scope, el, attrs, ctrl);
 			
-			var init = function() {
-				getTabs()
+				var tabs;
+				var observer;
+				var highlight = angular.element('<g-tab-highlight></g-tab-highlight>');
+				var currentTab;
+				el.append(highlight);
 
-				observer = new MutationObserver(function(mutations) {
-					mutations.forEach(function(mutation) {
-						if (mutation.type === 'childList') {
-							getTabs();
+				var highlightStyle = $window.getComputedStyle(highlight[0]);
+				
+				var init = function() {
+					getTabs()
+
+					observer = new MutationObserver(function(mutations) {
+						mutations.forEach(function(mutation) {
+							if (mutation.type === 'childList') {
+								getTabs();
+							}
+
+							var target = angular.element(mutation.target);
+					    	if (isTab(target) && target.hasClass('active')) {
+					    		makeActive(target);
+					    	}
+					  	});    
+					});
+
+					el.on('click touchstart', function(evt){
+						var target = angular.element(evt.target);
+						if (isTab(target)) {
+							makeActive(target);
 						}
+					});
 
-						var target = angular.element(mutation.target);
-				    	if (target.hasClass('g-tab active')) {
-				    		makeActive(target);
-				    	}
-				  	});    
-				});
+					angular.element($window).on('resize', setHighlight);
 
-				el.on('click', function(evt){
-					var target = angular.element(evt.target);
-					if (target.hasClass('g-tab')) {
-						makeActive(target);
+					for (var i = 0; i < tabs.length; i++) {
+						if (angular.element(tabs[i]).hasClass('active')) {
+							currentTab = angular.element(tabs[i]);
+							setHighlight();
+							break;
+						}
 					}
-				});
 
-				angular.element($window).on('resize', setHighlight);
-
-				for (var i = 0; i < tabs.length; i++) {
-					if (angular.element(tabs[i]).hasClass('active')) {
-						currentTab = angular.element(tabs[i]);
-						setHighlight();
-						break;
-					}
-				}
-
-				startObserving();
-			};
-
-			var startObserving = function() {
-				observer.observe(el[0], { attributes: true, childList: true, characterData: true, subtree: true });
-			};
-
-			var stopObserving = function() {
-				observer.disconnect();
-			};
-
-			var setHighlight = function() {
-				var props = {
-					visibility: 'visible'
+					startObserving();
 				};
 
-				if (el.hasClass('g-tabs-vertical')) {
-					props.height = currentTab[0].offsetHeight + 'px';
-					props.top = currentTab[0].offsetTop + 'px';
-				} else {
-					props.width = currentTab[0].offsetWidth + 'px';
-					props.left = currentTab[0].offsetLeft + 'px';
+				var startObserving = function() {
+					observer.observe(el[0], { attributes: true, childList: true, characterData: true, subtree: true });
+				};
+
+				var stopObserving = function() {
+					observer.disconnect();
+				};
+
+				var setHighlight = function() {
+					if (!currentTab) return;
+
+					var props = {
+						visibility: 'visible'
+					};
+
+					if (el.hasClass('g-tabs-vertical')) {
+						props.height = currentTab[0].offsetHeight - parseInt(highlightStyle.marginTop) - parseInt(highlightStyle.marginBottom) + 'px';
+						props.transform = props['-webkit-transform'] = props['-moz-transform'] = props['-ms-transform'] = 'translateY(' + currentTab[0].offsetTop + 'px)';
+					} else {
+						props.width = currentTab[0].offsetWidth - parseInt(highlightStyle.marginLeft) - parseInt(highlightStyle.marginRight) + 'px';
+						props.transform = props['-webkit-transform'] = props['-moz-transform'] = props['-ms-transform'] = 'translateX(' + currentTab[0].offsetLeft + 'px)';
+					}
+					
+					highlight.css(props);
+				};
+
+				var isTab = function(node) {	
+					return node.hasClass('g-tab') || node[0].nodeName === 'G-TAB';
 				}
-				
-				highlight.css(props);
-			};
 
-			var getTabs = function() {
-				var children = el.children();
-				tabs = [];
+				var getTabs = function() {
+					var children = el.children();
+					tabs = [];
 
-				for (var i = 0; i < children.length; i++) {
-					var c = angular.element(children[i]);
-					if (c.hasClass('g-tab') || c.nodeName === 'G-TAB') {
-						if (c.hasClass('active')) {
-							currentTab = c;
-							setHighlight();
+					for (var i = 0; i < children.length; i++) {
+						var c = angular.element(children[i]);
+						if (isTab(c)) {
+							if (c.attr('as')) ctrl[c.attr('as')] = false;
+
+							if (c.hasClass('active')) {
+								if (c.attr('as')) ctrl[c.attr('as')] = true;
+								currentTab = c;
+								setHighlight();
+							}
+							tabs.push(c);
 						}
-						tabs.push(c);
 					}
-				}
 
-				tabs = angular.element(tabs);
-			};
+					tabs = angular.element(tabs);
+				};
 
-			var makeActive = function(tab) {
-				stopObserving();
-				currentTab = angular.element(tab);
-				currentTab.addClass('active');
+				var makeActive = function(tab) {
+					stopObserving();
+					currentTab = angular.element(tab);
+					currentTab.addClass('active');
+					if (currentTab.attr('as')) ctrl[currentTab.attr('as')] = true;
 
-				var siblings = [];
-				for (var i = 0; i < tabs.length; i++) {
-					if (tabs[i] != currentTab[0]) {
-						siblings.push(tabs[i]);
+					for (var i = 0; i < tabs.length; i++) {
+						if (tabs[i][0] !== currentTab[0]) {
+							if (tabs[i].attr('as')) ctrl[tabs[i].attr('as')] = false;
+							tabs[i].removeClass('active');
+						}
 					}
-				}
 
-				angular.element(siblings).removeClass('active');
-				setHighlight();
-				
-				startObserving();
-				
-			};
+					setHighlight();
+					startObserving();
 
-			init();
+					$timeout();
+				};
+
+				init();
+			}
+		},
+		controller: function() {
+
 		}
 	}
 });

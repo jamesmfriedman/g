@@ -2,15 +2,12 @@
   "name": "g",
   "version": "0.0.1",
   "description": "A component library for Angular",
-  "main": "ngen.config.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "dependencies": {
-    "ngen-ng": "^0.0.1",
-    "ngen": "^0.0.1"
+  "main": "dist/g.js",
+  "dependencies": {  
   },
   "devDependencies": {
+    "ngen-ng": "^0.0.1",
+    "ngen": "^0.0.1",
     "autoprefixer-loader": "^3.1.0",
     "css-loader": "^0.23.0",
     "extract-text-webpack-plugin": "^0.9.1",

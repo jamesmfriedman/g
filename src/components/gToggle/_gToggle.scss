@@ -1,0 +1,38 @@
+/**
+ * Stateful Toggles
+ */
+@mixin gToggleOff {
+	display: none;
+}
+
+&[g-toggle] {
+	
+	& > * {
+		display: block;
+		width: auto;
+	}
+
+	&.on {
+		[state='off'] {
+			@include gToggleOff;
+		}
+
+		&:not(:hover), &.on-added {
+			[state='action'] {
+				@include gToggleOff;	
+			}
+		}
+
+		&:hover:not(.on-added) {
+			[state='on'] {
+				@include gToggleOff;
+			}
+		} 
+	}
+
+	&.off {
+		[state='on'], [state='action'] {
+			@include gToggleOff;
+		}
+	}
+}

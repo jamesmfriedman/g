@@ -1,14 +1,15 @@
 $g-rem-size: 4px !default;
 $g-animate-classname: 'animate' !default;
-$g-border-radius: .625rem !default;
+$g-border-radius: 1.25rem !default;
+$g-gutter: 10rem;
 
 $g-size-xs: 6rem !default;
 $g-size-sm: 8rem !default;
 $g-size-md: 10rem !default;
 $g-size-lg: 14rem !default;
 
-$g-color-default-border: rgba(0,0,0,.2) !default;
-$g-color-default-bg: white !default;
+$g-color-default-border: #e6e6e6 !default;
+$g-color-default-bg: #e6e6e6 !default;
 $g-color-default-text: rgba(0,0,0,.8) !default; 
 
 $g-color-inverse-border: #333 !default;

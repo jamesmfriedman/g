@@ -2,7 +2,6 @@
 @import './normalize';
 @import './variables';
 @import './mixins';
-@import './common';
 
 // components
 @import '../components/gBtn/gBtn';
@@ -18,3 +17,8 @@
 @import '../components/gLabel/gLabel';
 @import '../components/gPill/gPill';
 @import '../components/gBadge/gBadge';
+@import '../components/gNotification/gNotification';
+@import '../components/gLoading/gLoading';
+@import '../components/gToggle/gToggle';
+
+@import './common';

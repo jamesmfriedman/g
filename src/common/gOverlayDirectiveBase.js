@@ -1,5 +1,5 @@
-angular.module('G.common').service('gOverlayBase', function($document, $window, gMixins, gPosition) {
-	return function(overlayType, overlayPostionMode) {
+angular.module('G.common').factory('gOverlayDirectiveBase', function($document, $window, gMixins, gHelpers, gPosition) {
+	return function(overlayType, overlayPostionMode, defaultPosition) {
 
 		return angular.merge({
 			restrict: 'E',
@@ -8,12 +8,14 @@ angular.module('G.common').service('gOverlayBase', function($document, $window, 
 			},
 			link: function(scope, el, attrs, ctrl) {
 				gMixins.showHide.link(scope, el, attrs, ctrl);
-				gMixins.directiveApiLink(scope, el, attrs, ctrl);
-				gMixins.makeAnimatable(el);
+				gHelpers.directiveApiLink(scope, el, attrs, ctrl);
+				gHelpers.makeAnimatable(scope, el, attrs);
 
 				scope.params = scope.params || {};
+				scope.params.clickToClose = scope.params.clickToClose === undefined ? true : scope.params.clickToClose;
+
 				overlayPostionMode = scope.params.positionMode || overlayPostionMode;
-				scope.params.clickToClose = scope.params.clickToClose || true;
+				defaultPosition = defaultPosition || ['bottom', 'center'];
 
 				var win = angular.element($window);
 				var body = angular.element($document[0].body);
@@ -21,10 +23,9 @@ angular.module('G.common').service('gOverlayBase', function($document, $window, 
 				var currentOrigin;
 				var scrollParents;
 
-
 				var init = function() {
 					position = getRequestedPositionParams();
-
+					console.log(position)
 					ctrl.on('show', showHandler);
 					ctrl.on('hide', hideHandler);
 					body.append(el);
@@ -52,14 +53,14 @@ angular.module('G.common').service('gOverlayBase', function($document, $window, 
 						}
 					}
 					else {
-						pos = ['bottom', 'center'];	
+						pos = defaultPosition;	
 					}
 
-					return pos;
+					return [pos[0], pos[1]];
 				};
 
 				var showHandler = function(evt, showEl, origin) {
-					el = showEl; //redefine the el for ngIf, sicne ngIf maeks new ones everytime
+					el = showEl; //redefine the el for ngIf, sicne ngIf makes new ones everytime
 					currentOrigin = origin;
 					origin ? el.addClass('g-' + overlayType + '-has-origin') : el.removeClass('g-' + overlayType + '-has-origin');
 					scrollParents = getScrollParents(currentOrigin);				
@@ -80,19 +81,11 @@ angular.module('G.common').service('gOverlayBase', function($document, $window, 
 					body.off('click', clickToCloseHandler);
 					if (scrollParents) scrollParents.off('scroll', positionChangeHandler);
 					
-					currentOrigin = null;
 					scrollParents = null;
 
 					if (evt.name == 'hide' || evt.name == '$destroy' && scope.showing) {
 						body.removeClass('g-' + overlayType + '-open');
 					}
-
-					el.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-						el.css({
-							top: '',
-							left: ''
-						});
-					});
 				};	
 
 				var positionChangeHandler = function() {
@@ -101,7 +94,6 @@ angular.module('G.common').service('gOverlayBase', function($document, $window, 
 
 				var clickToCloseHandler = function() {
 					ctrl.hide();
-					scope.$apply();
 				};
 
 				/**

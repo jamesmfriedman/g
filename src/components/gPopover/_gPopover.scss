@@ -125,15 +125,15 @@ g-popover {
 			transition: opacity 0s;
 		}
 
-		&.ng-hide-add-active, &.ng-hide-remove-active {
+		&.ng-hide-add-active, &.ng-hide-remove-active, &.ng-enter, &.ng-leave {
 			transition: opacity .2s;
 		}
 
-		&.ng-hide-remove, &.ng-hide-add.ng-hide-add-active { 
+		&.ng-hide-remove, &.ng-hide-add.ng-hide-add-active, &.ng-enter, &.ng-leave.ng-leave-active { 
 			opacity: 0; 
 		}
 		
-		&.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active { 
+		&.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active, &.ng-enter.ng-enter-active, &.ng-leave { 
 			opacity: 1 ;
 		}
 	}

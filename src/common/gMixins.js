@@ -1,92 +1,86 @@
-angular.module('G.common').service('gMixins', function($animate) {
+var mod = angular.module('G.common');
+mod.service('gMixins', function($animate, $timeout, gHelpers) {
 
 	/**
 	 * The necessary pieces for a show hide directive like a dropdown or modal
 	 */
 	var showHide = {
 		directiveConfig: {
-			scope : {
-				ngShow: '=?',
-				ngIf: '=?'	
-			},
+			scope : {},
 			priority: 601
 		},
 
 		link: function(scope, el, attrs, ctrl){
 			scope.el = el;
 
-			// A hook for ngIfs since the original el is set to [comment]
-			if (attrs.ngIf) {
-				scope.$watch('ngIf', function(val){
-					if (val) {
-						scope.el = el.next();
-
-						// manually trigger the animation for enter
-						makeAnimatable(scope.el);
-						$animate.enter(scope.el, scope.el.parent(), el);
+			if (attrs.ngShow) {
+				scope.$watch(attrs.ngShow, function(val){
+					if (val && !scope.showing) {
+						ctrl.show();
+					} else if (!val && scope.showing) {
+						ctrl.hide();
 					}
 				});
 			}
 
-			scope.$watch('showing', function(val){
-				scope.ngHide = !val;
-				scope.ngShow = val;
-				scope.ngIf = val;
-			});
-		},
-
-		controller: function($scope){
-			if ($scope.showing === undefined) $scope.showing = false;
-
-			this.show = function(origin) {
-				$scope.showing = true;
-
-				// we have to send this in a timeout in case we have an ngIf and need to grab the element
-				setTimeout(function(){	
-					$scope.$emit('show', $scope.el, origin);
+			if (attrs.ngHide) {
+				scope.$watch(attrs.ngHide, function(val){
+					if (!val && !scope.showing) {
+						ctrl.show();
+					} else if (val && scope.showing) {
+						ctrl.hide();
+					}
 				});
-			};
+			}
 
-			this.hide = function(origin) {
-				$scope.showing = false;
-				$scope.$emit('hide', $scope.el, origin);
-			};
+			// A hook for ngIfs since the original el is set to [comment]
+			if (attrs.ngIf) {
+				scope.$watch(attrs.ngIf, function(val){
+					if (val && !scope.showing) {
+						ctrl.show();
+					} else if (!val && scope.showing) {
+						ctrl.hide();
+					}
+				});
 
-			this.toggle = function(origin) {
-				$scope.showing ? this.hide(origin) : this.show(origin);
-			};
-
-			this.on = function(evt, cb) {
-				$scope.$on(evt, cb);
-			};
-		},
-	};
-
-
-	/**
-	 * To be executed inside of a link function
-	 */
-	var directiveApiLink = function(scope, el, attrs, ctrl) {
-		if ('api' in attrs) {
-			if (typeof scope.$parent[attrs.api] === 'object') {
-				angular.merge(scope.$parent[attrs.api], ctrl);
-			} else {
-				scope.$parent[attrs.api] = ctrl;
+				scope.$watch('showing', function(val){
+					if (val) {
+						scope.el = el.next();
+						gHelpers.makeAnimatable(scope, scope.el, attrs);
+					}
+				});
 			}
 		}
 	};
 
-	/**
-	 * Makes an element animatable
-	 */
-	var makeAnimatable = function(el) {
-		el.addClass('animate');
-		$animate.enabled(el, true);
-	};
-	
 	return {
-		showHide: showHide,
-		directiveApiLink: directiveApiLink,
-		makeAnimatable: makeAnimatable
+		showHide: showHide
 	}
+});
+
+mod.controller('ShowHideController', function($scope, $timeout) {
+	if ($scope.showing === undefined) $scope.showing = this.showing = false;
+
+	this.show = function(origin) {
+		$scope.showing = this.showing = true;
+
+		// we have to send this in a timeout in case we have an ngIf and need to grab the element
+		$timeout(function(){	
+			$scope.$emit('show', $scope.el, origin);
+		});
+	};
+
+	this.hide = function(origin) {
+		$scope.showing = this.showing = false;
+		$scope.$emit('hide', $scope.el, origin);
+		$timeout(angular.noop);
+	};
+
+	this.toggle = function(origin) {
+		$scope.showing ? this.hide(origin) : this.show(origin);
+	};
+
+	this.on = function(evt, cb) {
+		$scope.$on(evt, cb);
+	};
 });

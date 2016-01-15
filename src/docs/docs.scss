@@ -48,6 +48,11 @@ body {
 		border-right: 1px solid $g-color-default-border;
 		flex: 0 0 200px;
 	}
+
+	ui-view {
+		flex: 1;
+		position: relative;
+	}
 }
 
 .docs-header {
