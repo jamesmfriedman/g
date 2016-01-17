@@ -33,6 +33,10 @@
 	&:active {
 		transform: translateY(1px);
 	}
+
+	&:focus {
+		outline: none;
+	}
 }
 
 g-btn, .g-btn {
@@ -88,6 +92,13 @@ g-btn, .g-btn {
 	}
 
 	/**
+	 * Disabled
+	 */
+	&[disabled] {
+		opacity: .5;
+	}
+
+	/**
 	 * Sizes
 	 */
 	&.lg {
@@ -105,6 +116,7 @@ g-btn, .g-btn {
 	 */
 	[g-icon] {
 		max-height:2px;
+		color: inherit;
 		
 		&:before {
 			line-height:0;

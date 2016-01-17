@@ -11,7 +11,7 @@ angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout
 				var observer;
 				var highlight = angular.element('<g-tab-highlight></g-tab-highlight>');
 				var currentTab;
-				el.append(highlight);
+				el.prepend(highlight);
 
 				var highlightStyle = $window.getComputedStyle(highlight[0]);
 				

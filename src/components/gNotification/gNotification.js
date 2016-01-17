@@ -5,24 +5,34 @@ angular.module('G.notification').directive('gNotification', function(gHelpers, $
 		restrict: 'E',
 		templateUrl: 'gNotification.html',
 		scope: {
-			params: '=params'
+			params: '='
 		},
 		link: function(scope, el, attrs) {
+			var notification;
+			var unbind;
 			gHelpers.makeAnimatable(scope, el, attrs);
-			scope.notification = scope.params;
 
-			if (scope.notification.constructor.name !== 'gNotification') {
-				var config = scope.notification;
-				config.native = false;
-				scope.notification = gNotifications.create(config.title, config);
+			if (scope.params.constructor.name !== 'gNotification') {
+			
+				unbind = scope.$watch('params', function(val){
+					var config = angular.merge({}, val);
+					config.native = false;
+					scope.notification = gNotifications.create(config.title, config);
+				}, true);
 			}
 
 			el.on('click', function(evt){
 				scope.notification.raiseEvent('click', evt);
 			});
 
-			scope.removeNotification = function(n) {
-				if (!gNotifications.remove(n)) {
+			scope.removeNotification = function() {
+				if (unbind) unbind();
+
+				if (scope.params.onClose) {
+					scope.params.onClose();
+				}
+
+				if (!gNotifications.remove(scope.notification) && !attrs.ngShow && !attrs.ngHide && !attrs.ngIf && !attrs.ngSwitchWhen) {
 					$animate.leave(el);
 				}
 			};

@@ -7,33 +7,37 @@
 }
 
 @mixin g-text-styles() {
-	color: rgba(0,0,0,.8);
+    color: rgba(0,0,0,.8);
 
-	&.secondary {
-		color: rgba(0,0,0,.5);
-	}
+    &.inherit-color {
+    	color: inherit;
+    }
 
-	&.tertiary {
-		color: rgba(0,0,0,.3);
-	}
+    &.secondary {
+        color: rgba(0,0,0,.5);
+    }
 
-	&.inverse {
-		color: rgba(255,255,255,.8);
+    &.tertiary {
+        color: rgba(0,0,0,.3);
+    }
 
-		&.secondary {
-			color: rgba(255,255,255,.5);
-		}
+    &.inverse {
+        color: rgba(255,255,255,1);
 
-		&.tertiary {
-			color: rgba(255,255,255,.3);
-		}
-	}
+        &.secondary {
+            color: rgba(255,255,255,.8);
+        }
 
-	&.bold {
-		font-weight: bold;
-	}
+        &.tertiary {
+            color: rgba(255,255,255,.5);
+        }
+    }
 
-	&.italic {
-		font-style: italic;
-	}
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
 }

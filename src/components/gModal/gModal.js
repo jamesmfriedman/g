@@ -40,14 +40,14 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 				el = showEl; //redefine the el for ngIf, since ngIf makes new ones everytime
 				body.append(el);
 				
-				el.on('click', function(evt){
+				el.on('click touchstart', function(evt){
 					evt.stopPropagation();
 				});
 				
 				gModals._add(ctrl);
 
 				if (scope.params.clickToClose) {
-					body.one('click', clickToCloseHandler);
+					body.one('click touchstart', clickToCloseHandler);
 				}
 				
 			};

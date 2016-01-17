@@ -11,9 +11,17 @@
 	     -o-appearance: none;
 	        appearance: none;
 
+	&.alt {
+		background-color: rgba(0,0,0,.02);
+	}
+
 	&:focus {
 		//box-shadow: 0 0 3px $g-color-highlight;
 		border-color: $g-color-highlight;
+	}
+
+	&.error {
+		border-color: $g-color-danger-border;
 	}
 }
 
@@ -26,6 +34,12 @@
 	height: $g-size-md;
 	line-height: $g-size-md;
 	width: 60rem;
+
+	&.lg {
+		height: $g-size-lg;
+		line-height: $g-size-lg;
+		font-size: 4rem;
+	}
 }
 
 .g-input-textarea {

@@ -1,5 +1,5 @@
 <div class="g-notification-icon" ng-if="notification.icon" style="background-image: url({{ notification.icon }})"></div>
-<g-btn-close ng-click="removeNotification(notification)"></g-btn-close>
+<g-btn-close ng-click="removeNotification()"></g-btn-close>
 <div class="g-notification-content">
 	<h2 class="text-subhead bold g-notification-title">{{ notification.title }}</h2>
 	<div class="text-body secondary g-notification-body" ng-bind-html="notification.body"></div>

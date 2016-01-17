@@ -14,8 +14,8 @@ body {
 	}
 
 	&.g-modal-open {
-		overflow:hidden;
-
+		overflow: hidden;
+	
 		&:after {
 			opacity: 1;
 			bottom:0;
@@ -74,7 +74,7 @@ g-modal-header {
 g-modal-body {
 	display: block;
 	padding: ($g-size-xs / 3) $g-size-xs;
-	flex: 1;
+	flex: 1 1 auto;
 	overflow-y: auto;
 }
 

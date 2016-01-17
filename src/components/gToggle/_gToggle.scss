@@ -12,6 +12,13 @@
 		width: auto;
 	}
 
+	[state='spacer'] {
+		max-height:0;
+		visibility: hidden;
+		overflow: hidden;
+		speak: none;
+	}
+
 	&.on {
 		[state='off'] {
 			@include gToggleOff;

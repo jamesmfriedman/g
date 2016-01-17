@@ -6,6 +6,15 @@ html {
 	font-size: $g-rem-size;
 }
 
+hr {
+	height: 1px;
+	background-color: $g-color-default-border;
+}
+
+[disabled], .disabled {
+	cursor: not-allowed !important;
+}
+
 .block {
 	display: block;
 }

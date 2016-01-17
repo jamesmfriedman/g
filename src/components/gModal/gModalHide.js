@@ -4,7 +4,7 @@ angular.module('G.modal').directive('gModalHide', function() {
 		restrict: 'EA',
 		require: '^^gModal',
 		link: function(scope, el, attrs, modalCtrl) {
-			el.on('click', function(){
+			el.on('click touchstart', function(){
 				modalCtrl.hide();
 			});
 		}

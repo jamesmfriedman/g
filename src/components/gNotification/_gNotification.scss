@@ -1,3 +1,17 @@
+@mixin g-notification-mixin($color, $background-color, $border-color, $title-color, $body-color) {
+	color: $color;
+	background-color: $background-color;
+	border-color: $border-color;
+
+	.g-notification-title {
+		color: $title-color;
+	}
+
+	.g-notification-body {
+		color: $body-color;
+	}
+}
+
 g-notification {
 	display:flex;
 	background: white;
@@ -11,17 +25,21 @@ g-notification {
 	 * Animations
 	 */
 	&.#{$g-animate-classname} {
-		&.ng-enter, &.ng-leave {
+		&.ng-enter, &.ng-leave, &.ng-hide-add, &.ng-hide-remove {
 			transition: .3s;
 		}
 
-		&.ng-enter, &.ng-leave.ng-leave-active { 
+		&.ng-enter, &.ng-leave.ng-leave-active, &.ng-hide-add.ng-hide-add-active, &.ng-hide-remove { 
 			opacity: 0;
 		}
 		
-		&.ng-enter.ng-enter-active, &.ng-leave { 
+		&.ng-enter.ng-enter-active, &.ng-leave, &.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active { 
 			opacity: 1 ;
 		}
+	}
+
+	&.danger {
+		@include g-notification-mixin($g-color-danger-text, $g-color-danger-bg, $g-color-danger-border, $g-color-danger-text, rgba($g-color-danger-text, .75));
 	}
 
 	.g-notification-icon {
@@ -41,6 +59,7 @@ g-notification {
 		top: 0;
 		right: 0;
 	}
+	
 }
 
 g-notification-list {
