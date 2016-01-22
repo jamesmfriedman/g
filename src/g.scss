@@ -1,0 +1,26 @@
+// common
+@import './stylesheets/normalize';
+@import './stylesheets/variables';
+@import './stylesheets/mixins';
+
+// components
+@import './components/gType/gType'; //includes some mixins that are needed
+@import './components/gAvatar/gAvatar';
+@import './components/gBadge/gBadge';
+@import './components/gBtn/gBtn';
+@import './components/gDropdown/gDropdown';
+@import './components/gForms/gForms';
+@import './components/gIcon/gIcon';
+@import './components/gLabel/gLabel';
+@import './components/gLoading/gLoading';
+@import './components/gMenuList/gMenuList';
+@import './components/gModal/gModal';
+@import './components/gNotification/gNotification';
+@import './components/gPill/gPill';
+@import './components/gPopover/gPopover';
+@import './components/gTabs/gTabs';
+@import './components/gToggle/gToggle';
+@import './components/gTooltip/gTooltip';
+
+// helpers
+@import './stylesheets/common';

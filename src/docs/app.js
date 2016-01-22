@@ -49,11 +49,23 @@ app.config(function($locationProvider, $provide, $compileProvider, $animateProvi
 /**
  * Controls the main app frame
  */
-app.run(function($rootScope) {
+app.run(function($rootScope, gConfig, $timeout) {
 		
 	// kills the 300ms delay for touch events on mobile
-	//FastClick.attach(document.body);
 
+	gConfig.getAvatar = function(obj) {
+			
+		if (!obj.name) {
+			obj.watch = true;	
+			$timeout(function(){
+				angular.merge(obj, {name: 'James Friedman', src:'img/_me.jpg'});
+				obj.watch = false;
+			}, 1000)		
+		}
+		
+
+		return obj;
+	};
 });
 
 module.exports = app;

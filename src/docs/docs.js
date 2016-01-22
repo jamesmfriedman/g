@@ -1,8 +1,8 @@
 //vendors
-require('./vendors/angular/angular.min');
-require('./vendors/angular-animate/angular-animate.min');
-require('./vendors/angular-ui-router/release/angular-ui-router.min');
-require('./vendors/angular-sanitize.min');
+require('angular/angular');
+require('angular-animate/angular-animate');
+require('angular-ui-router/release/angular-ui-router');
+require('angular-sanitize/angular-sanitize');
 
 require('../g');
 

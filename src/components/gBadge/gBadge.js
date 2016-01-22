@@ -3,7 +3,7 @@ angular.module('G.badge', []).directive('gBadge', function() {
 		restrict: 'E',
 		scope: {},
 		link: function(scope, el, attrs) {
-			el.addClass('g-badge');
+			
 		},
 		controller: function($scope) {
 

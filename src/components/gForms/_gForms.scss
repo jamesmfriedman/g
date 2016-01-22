@@ -59,3 +59,40 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.g-input-masked-file {
+	position: absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	opacity:0;
+	cursor: pointer;
+}
+
+g-input-group, .g-input-group {
+	display: flex;
+	position: relative;
+
+	.g-input:focus {
+		position: relative; //fixes an issues where the focused input needs to be above the other one
+	}
+
+	.g-input:not(:first-child):not(:last-child), g-input:not(:first-child):not(:last-child) {
+		border-radius:0;
+	}	
+
+	.g-input:not(:first-child), g-input:not(:first-child) {
+		margin-left:-1px;
+	}
+
+	.g-input:first-child, g-input:first-child {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.g-input:last-child, g-input:last-child {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+}

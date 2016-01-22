@@ -13,7 +13,8 @@ var gComponentRoutes = {
 	'overlays' : {name: 'Overlays'},
 	'dropdowns' : {name: 'Dropdowns'},
 	'modals' : {name: 'Modals'},
-	'collapse' : {name: 'Collapse'}
+	'collapse' : {name: 'Collapse'},
+	'avatars' : {name: 'Avatars'}
 };
 
 angular.module('G.docs').config(function($stateProvider, $urlRouterProvider){

@@ -1,4 +1,4 @@
-angular.module('G.popover').directive('gPopoverToggle', function(gMixins, $document) {
+angular.module('G.popover').directive('gPopoverToggle', function($document) {
 	return {
 		restrict: 'A',
 		scope: {
@@ -16,12 +16,12 @@ angular.module('G.popover').directive('gPopoverToggle', function(gMixins, $docum
 					el.on('click', toggle);
 				} else {
 					el.on('mouseenter', show);
-					el.on('mouseleave', hide)
+					el.on('mouseleave', hide);
 				};
 			};
 
-			var show = function() {
-				popoverCtrl.show(el);
+			var show = function(evt) {
+				popoverCtrl.show(evt, el);
 				scope.$apply();
 
 				if (popoverEl) {
@@ -39,7 +39,7 @@ angular.module('G.popover').directive('gPopoverToggle', function(gMixins, $docum
 					return;
 				}
 
-				popoverCtrl.hide(el);
+				popoverCtrl.hide(evt, el);
 				scope.$apply();
 			};
 

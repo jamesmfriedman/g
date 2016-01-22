@@ -82,7 +82,7 @@ angular.module('G.common').service('gPosition', function($window, $document) {
 	};
 
 	var positionElement = function(origin, el, x, y, mode) {
-		if (!origin || !el) return;
+		if (!origin[0] || !el[0]) return;
 		mode = mode || 'push';
 
 		var ob = origin[0].getBoundingClientRect();

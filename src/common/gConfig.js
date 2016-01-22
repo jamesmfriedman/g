@@ -3,7 +3,10 @@ angular.module('G.common').provider('gConfig', function() {
 	var config = {
 		iconPrefix: 'icon-',
 		useNativeNotifications: true,
-		defaultNotificationIcon: null
+		defaultNotificationIcon: null,
+		getAvatar: function(params) {
+			return params;
+		}
 	};
 
 	this.iconPrefix = function(prefix){
@@ -16,6 +19,10 @@ angular.module('G.common').provider('gConfig', function() {
 
 	this.defaultNotificationIcon = function(icon){
 		config.defaultNotificationIcon = icon;
+	};
+
+	this.getAvatar = function(func) {
+		config.getAvatar = func;
 	};
 
 	this.$get = function() {

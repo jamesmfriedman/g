@@ -1,15 +1,15 @@
-angular.module('G.common').factory('gOverlayDirectiveBase', function($document, $window, gMixins, gHelpers, gPosition) {
+angular.module('G.common').factory('gOverlayDirectiveBase', function($document, $window, gHelpers, gPosition) {
 	return function(overlayType, overlayPostionMode, defaultPosition) {
 
-		return angular.merge({
+		return {
 			restrict: 'E',
+			priority: 601,
 			scope: {
 				params: '=?'
 			},
 			link: function(scope, el, attrs, ctrl) {
-				gMixins.showHide.link(scope, el, attrs, ctrl);
 				gHelpers.directiveApiLink(scope, el, attrs, ctrl);
-				gHelpers.makeAnimatable(scope, el, attrs);
+				gHelpers.makeAnimatable(el, attrs);
 
 				scope.params = scope.params || {};
 				scope.params.clickToClose = scope.params.clickToClose === undefined ? true : scope.params.clickToClose;
@@ -22,10 +22,10 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 				var position;
 				var currentOrigin;
 				var scrollParents;
+				var originalEl = el;
 
 				var init = function() {
 					position = getRequestedPositionParams();
-					console.log(position)
 					ctrl.on('show', showHandler);
 					ctrl.on('hide', hideHandler);
 					body.append(el);
@@ -33,6 +33,7 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					scope.$on('$destroy', function(evt){
 						hideHandler(evt);
 						el.remove();
+						originalEl.remove();
 					});
 				};
 
@@ -59,10 +60,16 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					return [pos[0], pos[1]];
 				};
 
-				var showHandler = function(evt, showEl, origin) {
+				var showHandler = function(evt, originalEvent, showEl, origin) {
 					el = showEl; //redefine the el for ngIf, sicne ngIf makes new ones everytime
-					currentOrigin = origin;
-					origin ? el.addClass('g-' + overlayType + '-has-origin') : el.removeClass('g-' + overlayType + '-has-origin');
+					console.log(originalEvent);
+					if (origin) {
+						currentOrigin = origin;
+					} else if (originalEvent.target) {
+						currentOrigin = angular.element(originalEvent.target);
+					}
+
+					currentOrigin ? el.addClass('g-' + overlayType + '-has-origin') : el.removeClass('g-' + overlayType + '-has-origin');
 					scrollParents = getScrollParents(currentOrigin);				
 					scrollParents.on('scroll', positionChangeHandler);
 					win.on('resize', positionChangeHandler);
@@ -129,9 +136,7 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 
 				init();
 			},
-			controller: function($scope, $controller) {
-				angular.merge(this, $controller(gMixins.showHide.controller, {$scope: $scope}));
-			}
-		}, gMixins.showHide.directiveConfig);
-	}
+			controller: 'ShowHideController'
+		};
+	};
 });

@@ -3,7 +3,7 @@
 </div>
 
 <div class="container">
-    <g-btn ng-init="makeFavorite = false" g-dropdown-toggle="dropper" class="round"><i g-icon="heart" class="secondary"></i></g-btn>
+    <g-btn ng-init="makeFavorite = false" ng-click="dropper.show($event)" class="round"><i g-icon="heart" class="secondary"></i></g-btn>
 
     <g-dropdown ng-if="dropper.showing" as="dropper" ng-cloak>
         <g-menu-list>

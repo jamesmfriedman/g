@@ -1,0 +1,72 @@
+g-avatar, .g-avatar {
+	display: inline-block;
+	position: relative;
+	transform: translateZ(0);
+	background-color: $g-color-default-bg;
+	text-align: center;
+	border-radius: 50%;
+	font-size: $g-size-md;
+	width: 1em;
+	height: 1em;
+	line-height: 1;
+	cursor: pointer;
+
+	ng-transclude {
+		position: absolute;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+	}
+	
+	.g-avatar-initials {
+		@include text-body;
+
+		font-size: .5em;
+		line-height: 1;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+
+	.g-avatar-img {
+		border-radius: 50%;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		box-shadow: 0 0 0 1px rgba(0,0,0,.1) inset;
+		transform: translateZ(0);
+	}
+
+	img {
+		width: 100%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		opacity:0;
+		transition: .3s;
+		box-shadow: 0 0 0 1px rgba(0,0,0,.1) inset;
+
+		&[src] {
+			opacity: 1;
+		}
+	}
+
+	&.xs {
+		font-size: $g-size-xs;
+	}
+
+	&.sm {
+		font-size: $g-size-sm;
+	}
+
+	&.lg {
+		font-size: $g-size-lg;
+	}
+}

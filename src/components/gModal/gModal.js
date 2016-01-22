@@ -1,15 +1,15 @@
-angular.module('G.modal').directive('gModal', function($controller, $document, $animate, gMixins, gHelpers, gModals) {
+angular.module('G.modal').directive('gModal', function($controller, $document, $animate, gHelpers, gModals) {
 
-	return angular.merge({
+	return {
 		restrict: 'E',
+		priority: 601,
 		scope: {
 			params: '=?'
 		},
 		link: function(scope, el, attrs, ctrl) {
 			var parent = el.parent();
-			gMixins.showHide.link(scope, el, attrs, ctrl);
 			gHelpers.directiveApiLink(scope, el, attrs, ctrl);
-			gHelpers.makeAnimatable(scope, el, attrs);
+			gHelpers.makeAnimatable(el, attrs);
 
 			var body = angular.element($document[0].body);
 			scope.params = scope.params || {};
@@ -65,5 +65,5 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 		},
 		controller: 'ShowHideController'
 
-	}, gMixins.showHide.directiveConfig);
+	};
 });

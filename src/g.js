@@ -12,10 +12,10 @@ angular.module('G', [
 	'G.badge',
 	'G.notification',
 	'G.toggle',
+	'G.avatar',
 ]);
 
-
-require('./stylesheets/g.scss');
+require('./g.scss');
 
 require('./common');
 require('./common/gConfig');
@@ -39,3 +39,4 @@ require('./components/gPill');
 require('./components/gBadge');
 require('./components/gNotification');
 require('./components/gToggle');
+require('./components/gAvatar');

@@ -1,35 +1,62 @@
-.g-badge {
+g-badge, .g-badge {
+	@include text-label;
 	text-transform: uppercase;
 	white-space: nowrap;
 	background-color: $g-color-danger-bg;
 	color: $g-color-danger-text;
 	display: inline-block;
-	height: $g-size-xs;
-	line-height: $g-size-xs;
-	padding: 0 2rem;
+	line-height: 1;
+	padding: calc((#{$g-size-xs} - 1em) / 2) 2rem;
 	min-width: $g-size-xs;
+	min-height: $g-size-xs;
 	border-radius: 999px;
 	text-align: center;
-	font-weight: 600;
+	vertical-align: middle;
+	cursor: pointer;
 
 	&.inverse {
 		background-color: $g-color-inverse-bg;
 		color: $g-color-inverse-text;
 	}
+
+	[g-icon], .g-icon {
+		color: inherit;
+		vertical-align: top;
+		font-size: 1.5em;
+		margin: calc((1em - #{$g-size-xs} ) / 2);
+
+		&:not(:only-child) {
+			margin-left: .5rem;
+			margin-right: .5rem;
+		}
+	}
 }
 
-.g-btn .g-badge {
-	position: absolute;
-	top:0;
-	right:0;
-	transform: translate(50%, -50%)
+g-avatar, .g-avatar {
+	g-badge, .g-badge {
+		position: absolute;
+		top: 0;
+		left: 100%;
+		//margin-top: -$g-size-xs / ;
+		margin-left: -$g-size-xs;
+	}
 }
 
-.g-pill .g-badge, .g-label .g-badge {
-	height: 5rem;
-	line-height: 5rem;
-	min-width: 5rem;
-	padding: 0 2rem;
-	margin:-1rem -2rem -1rem 1rem;
+g-btn, .g-btn {
+	g-badge, .g-badge {
+		position: absolute;
+		top:0;
+		right:0;
+		transform: translate(50%, -50%)
+	}
+}
 
+g-pill, .g-pill, g-label, .g-label {
+	g-badge, .g-badge {
+		height: 5rem;
+		line-height: 5rem;
+		min-width: 5rem;
+		padding: 0 2rem;
+		margin:-1rem -2rem -1rem 1rem;
+	}
 }

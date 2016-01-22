@@ -5,8 +5,10 @@ angular.module('G.modal').directive('gModalHide', function() {
 		require: '^^gModal',
 		link: function(scope, el, attrs, modalCtrl) {
 			el.on('click touchstart', function(){
-				modalCtrl.hide();
+				setTimeout(function(){
+					modalCtrl.hide();
+				}, attrs.gModalHide || 0);
 			});
 		}
-	}
+	};
 });

@@ -14,11 +14,6 @@ module.exports = {
 					fd = fd.replace(/\[([\S\s]+)\]/g, '[$1\t\'' + (config.module.split(',')[0].replace(/\'/g, ''))  +'\',\n]');
 
 			  		fs.writeFileSync(f, fd, 'utf8');
-
-			  		// append to the main stylesheet
-					f = path.join(process.cwd(), 'src', 'stylesheets', 'g.scss');
-					fd = fs.readFileSync(f);
-			  		fs.writeFileSync(f, fd + "\n@import '../components/"+ config.name.raw +"/"+ config.name.raw +"';", 'utf8');
 				}
 			}
 		},

@@ -10,7 +10,7 @@ angular.module('G.notification').directive('gNotification', function(gHelpers, $
 		link: function(scope, el, attrs) {
 			var notification;
 			var unbind;
-			gHelpers.makeAnimatable(scope, el, attrs);
+			gHelpers.makeAnimatable(el, attrs);
 
 			if (scope.params.constructor.name !== 'gNotification') {
 			

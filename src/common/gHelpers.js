@@ -15,7 +15,7 @@ angular.module('G.common').service('gHelpers', function($animate) {
 	/**
 	 * Makes an element animatable
 	 */
-	function makeAnimatable(scope, el, attrs) {
+	function makeAnimatable(el, attrs) {
 		el.addClass('animate');
 		
 		if (attrs.ngIf) {
