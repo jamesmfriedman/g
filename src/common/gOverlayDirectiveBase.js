@@ -5,7 +5,8 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 			restrict: 'E',
 			priority: 601,
 			scope: {
-				params: '=?'
+				params: '=?',
+				ngIf: '&?'
 			},
 			link: function(scope, el, attrs, ctrl) {
 				gHelpers.directiveApiLink(scope, el, attrs, ctrl);
@@ -62,15 +63,15 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 
 				var showHandler = function(evt, originalEvent, showEl, origin) {
 					el = showEl; //redefine the el for ngIf, sicne ngIf makes new ones everytime
-					console.log(originalEvent);
+					
 					if (origin) {
 						currentOrigin = origin;
 					} else if (originalEvent.target) {
 						currentOrigin = angular.element(originalEvent.target);
 					}
-
+					
 					currentOrigin ? el.addClass('g-' + overlayType + '-has-origin') : el.removeClass('g-' + overlayType + '-has-origin');
-					scrollParents = getScrollParents(currentOrigin);				
+					scrollParents = getScrollParents(currentOrigin || body);				
 					scrollParents.on('scroll', positionChangeHandler);
 					win.on('resize', positionChangeHandler);
 

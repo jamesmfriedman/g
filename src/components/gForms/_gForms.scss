@@ -96,3 +96,67 @@ g-input-group, .g-input-group {
 		border-bottom-left-radius: 0;
 	}
 }
+
+.g-checkbox {
+	cursor: pointer;
+	padding-left: $g-size-xs + 2rem;
+	position: relative;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	
+	&:hover, &:focus {
+		.checkbox {
+			border-color: darken($g-color-default-border, 40%);
+		}
+
+		input:not(:checked) + .checkbox {
+			background-color: #fafafa;
+		}
+	}
+
+	.checkbox {
+		width: 1em;
+		height: 1em;
+		font-size: $g-size-xs;
+		border: 1px solid darken($g-color-default-border, 20%);
+		background-color: white;
+		border-radius: $g-border-radius;
+		position: absolute;
+		left:0;
+
+		&:before {
+			content:'';
+			position: absolute;
+			width: .25em;
+			height: .5em;
+			top: 50%;
+			left: 50%;
+			margin-top: -2px;
+			border-bottom: 3px solid $g-color-success-text;
+			border-right: 3px solid $g-color-success-text;
+			transform: translate(-50%, -50%) rotate(45deg) scale(0);
+			transition: .3s;
+		}
+	}
+
+
+	input {
+		width:0;
+		height:0;
+		position: absolute;
+		opacity:0;
+		top:0;
+		left:0;
+	}
+
+	input:checked + .checkbox {
+		background-color: $g-color-success-bg;
+		border-color: $g-color-success-border;
+
+		&:before {
+			transform: translate(-50%, -50%) rotate(45deg) scale(1);
+		}
+	}
+}
+
+
+

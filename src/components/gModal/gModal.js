@@ -36,7 +36,7 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 				ctrl.hide();
 			};
 
-			var showHandler = function(evt, showEl, origin) {
+			var showHandler = function(evt, originalEvent, showEl, origin) {
 				el = showEl; //redefine the el for ngIf, since ngIf makes new ones everytime
 				body.append(el);
 				

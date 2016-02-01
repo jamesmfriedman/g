@@ -26,18 +26,18 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $rootScope,
 				});
 				
 				
-				el.on('mouseenter', function(evt){
+				el.on('mouseenter touchstart', function(evt){
 					createTooltip();
 					timeout = setTimeout(function(){showTip(evt);}, 500);
 				});
 				
-				el.on('mouseleave', hideTip);
+				el.on('mouseleave touchend touchcancel', hideTip);
 			}
 
 			function createTooltip() {
 				tooltipScope = scope.$new();
 				tooltipScope.title = title;
-				tooltipEl = $compile('<g-tooltip-overlay class="g-tooltip-overlay" params="{positionMode: \'swap\'}" ng-if="'+ show +'" as="'+ as +'">{{ title }}</g-tooltip-overlay>')(tooltipScope)
+				tooltipEl = $compile('<g-tooltip-overlay class="g-tooltip-overlay" params="{positionMode: \'swap\'}" ng-if="'+ show +'" as="'+ as +'">{{ title }}</g-tooltip-overlay>')(tooltipScope);
 			}
 				
 			function showTip(evt) {

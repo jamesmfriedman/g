@@ -1,6 +1,7 @@
 g-avatar, .g-avatar {
 	display: inline-block;
 	position: relative;
+	vertical-align: middle;
 	transform: translateZ(0);
 	background-color: $g-color-default-bg;
 	text-align: center;
@@ -41,19 +42,11 @@ g-avatar, .g-avatar {
 		left: 0;
 		box-shadow: 0 0 0 1px rgba(0,0,0,.1) inset;
 		transform: translateZ(0);
-	}
-
-	img {
-		width: 100%;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
 		opacity:0;
 		transition: .3s;
-		box-shadow: 0 0 0 1px rgba(0,0,0,.1) inset;
+		background: transparent none scroll no-repeat center center / cover;
 
-		&[src] {
+		&.in {
 			opacity: 1;
 		}
 	}

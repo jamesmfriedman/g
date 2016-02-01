@@ -28,15 +28,14 @@ angular.module('G.common').controller('ShowHideController', function($scope, $el
 		}
 
 		// A hook for ngIfs since the original el is set to [comment]
-		if ($attrs.ngIf) {
-			// $scope.$watch($attrs.ngIf, function(val){
-			// 	console.log('In HERE', val)
-			// 	if (val && !$scope.showing) {
-			// 		$ctrl.show();
-			// 	} else if (!val && $scope.showing) {
-			// 		$ctrl.hide();
-			// 	}
-			// });
+		if ($scope.ngIf) {
+			$scope.$watch('ngIf()', function(val){
+				if (val && !$scope.showing) {
+					$ctrl.show();
+				} else if (!val && $scope.showing) {
+					$ctrl.hide();
+				}
+			});
 
 			$scope.$watch('showing', function(val){
 				if (val && $element.next()[0]) {
@@ -49,7 +48,7 @@ angular.module('G.common').controller('ShowHideController', function($scope, $el
 
 	$ctrl.show = function(evt, origin) {
 		evt = evt || {};
-		$scope.showing = this.showing = true;
+		$scope.showing = $ctrl.showing = true;
 
 		// we have to send this in a timeout in case we have an ngIf and need to grab the element
 		$timeout(function(){
@@ -59,13 +58,13 @@ angular.module('G.common').controller('ShowHideController', function($scope, $el
 
 	$ctrl.hide = function(evt, origin) {
 		evt = evt || {};
-		$scope.showing = this.showing = false;
+		$scope.showing = $ctrl.showing = false;
 		$scope.$emit('hide', evt, $scope.el, origin);
 		$timeout(angular.noop);
 	};
 
 	$ctrl.toggle = function(evt, origin) {
-		$scope.showing ? this.hide(evt, origin) : this.show(evt, origin);
+		$scope.showing ? $ctrl.hide(evt, origin) : $ctrl.show(evt, origin);
 	};
 
 	$ctrl.on = function(evt, cb) {

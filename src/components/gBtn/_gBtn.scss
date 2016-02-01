@@ -115,7 +115,7 @@ g-btn, .g-btn {
 	/**
 	 * Icons
 	 */
-	[g-icon] {
+	& > [g-icon] {
 		max-height:2px;
 		color: inherit;
 		

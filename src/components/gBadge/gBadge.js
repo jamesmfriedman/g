@@ -1,12 +1,9 @@
-angular.module('G.badge', []).directive('gBadge', function() {
+angular.module('G.badge', []).directive('gBadge', function(gHelpers) {
 	return {
 		restrict: 'E',
 		scope: {},
 		link: function(scope, el, attrs) {
-			
-		},
-		controller: function($scope) {
-
+			gHelpers.makeAnimatable(el, attrs);					
 		}
-	}
+	};
 });

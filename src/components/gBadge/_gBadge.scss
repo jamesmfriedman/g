@@ -1,5 +1,8 @@
 g-badge, .g-badge {
 	@include text-label;
+	@include gFadeInOut;
+	@include gTouchHighlight;
+
 	text-transform: uppercase;
 	white-space: nowrap;
 	background-color: $g-color-danger-bg;
@@ -17,6 +20,12 @@ g-badge, .g-badge {
 	&.inverse {
 		background-color: $g-color-inverse-bg;
 		color: $g-color-inverse-text;
+	}
+
+	&.sm {
+		padding: calc((#{$g-size-sm} - 1em) / 2) 2rem;
+		min-width: $g-size-sm;
+		min-height: $g-size-sm;
 	}
 
 	[g-icon], .g-icon {

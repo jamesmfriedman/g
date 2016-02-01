@@ -1,8 +1,9 @@
-g-menu-list {
+g-menu-list, .g-menu-list {
 	display: block;
 }
 
-g-menu-list-item {
+g-menu-list-item, .g-menu-list-item {
+	@include text-body;
 	height: $g-size-md;
 	line-height: $g-size-md;
 	white-space: nowrap;
@@ -10,16 +11,20 @@ g-menu-list-item {
 	text-overflow: ellipsis;
 	display: block;
 	padding: 0 $g-size-md / 2;
+	cursor: pointer;
+	text-decoration: none;
 }
 
-g-dropdown g-menu-list {
-	margin: 0 #{-($g-size-md / 2)};
+g-dropdown, .g-dropdown {
+	g-menu-list, .g-menu-list {
+		margin: 0 #{-($g-size-md / 2)};
 
-	&:first-child {
-		margin-top: -($g-size-md / 4)
-	}
+		&:first-child {
+			margin-top: -($g-size-md / 4)
+		}
 
-	&:last-child {
-		margin-bottom: -($g-size-md / 4)	
+		&:last-child {
+			margin-bottom: -($g-size-md / 4)	
+		}
 	}
 }

@@ -16,7 +16,7 @@ angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout
 				var highlightStyle = $window.getComputedStyle(highlight[0]);
 				
 				var init = function() {
-					getTabs()
+					getTabs();
 
 					observer = new MutationObserver(function(mutations) {
 						mutations.forEach(function(mutation) {
@@ -79,7 +79,7 @@ angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout
 
 				var isTab = function(node) {	
 					return node.hasClass('g-tab') || node[0].nodeName === 'G-TAB';
-				}
+				};
 
 				var getTabs = function() {
 					var children = el.children();
@@ -122,10 +122,10 @@ angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout
 				};
 
 				init();
-			}
+			};
 		},
 		controller: function() {
 
 		}
-	}
+	};
 });

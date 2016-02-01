@@ -1,6 +1,4 @@
 <span class="g-avatar-initials secondary" ng-show="!gAvatar.avatar.src">{{ gAvatar.avatar.initials }}</span>
-<div class="g-avatar-img">
-	<img ng-src="{{ gAvatar.avatar.src }}" alt="{{ gAvatar.avatar.name }}"/>
-</div>
+<div class="g-avatar-img" ng-style="gAvatar.style" ng-class="{in: gAvatar.avatar.src}"></div>
 <ng-transclude></ng-transclude>
 
