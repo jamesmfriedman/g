@@ -51,9 +51,9 @@ angular.module('G.common').controller('ShowHideController', function($scope, $el
 		$scope.showing = $ctrl.showing = true;
 
 		// we have to send this in a timeout in case we have an ngIf and need to grab the element
-		$timeout(function(){
+		setTimeout(function(){
 			$scope.$emit('show', evt, $scope.el, origin);
-		});
+		}, 0);
 	};
 
 	$ctrl.hide = function(evt, origin) {

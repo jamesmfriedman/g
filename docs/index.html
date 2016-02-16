@@ -12,10 +12,10 @@
     </head>
     <body>
         <g-tabs class="lg main-nav">
-            <a class="g-tab" ui-sref-active="active" ui-sref="home">Home</a>
-            <a class="g-tab" ui-sref-active="active" ui-sref="components">Components</a>
-            <g-tab ui-sref-active="active">Two</g-tab>
-            <g-tab ui-sref-active="active" ng-class="{active: tester}">Three</g-tab>
+            <a class="g-tab foo1" ui-sref-active="active" ui-sref="home">Home</a>
+            <a class="g-tab foo2" ui-sref-active="active" ui-sref="components">Components</a>
+            <g-tab class="foo3" ui-sref-active="active">Two</g-tab>
+            <g-tab class="foo4" ui-sref-active="active" ng-class="{active: tester}">Three</g-tab>
         </g-tabs>
 
         <div id="content" ui-view>

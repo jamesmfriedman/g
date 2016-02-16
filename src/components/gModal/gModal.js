@@ -4,7 +4,8 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 		restrict: 'E',
 		priority: 601,
 		scope: {
-			params: '=?'
+			params: '=?',
+			ngIf: '&?'
 		},
 		link: function(scope, el, attrs, ctrl) {
 			var parent = el.parent();
@@ -58,7 +59,7 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 				});
 				
 				gModals._remove(ctrl);
-				body.off('click', clickToCloseHandler);
+				body.off('click touchstart', clickToCloseHandler);
 			};
 
 			init();	

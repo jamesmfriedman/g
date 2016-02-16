@@ -19,6 +19,10 @@ g-tabs, .g-tabs {
 		.g-tab {
 			display: block;
 		}
+
+		g-tab-highlight, .g-tab-highlight {
+			bottom: auto;
+		}
 	}
 
 	&.lg g-tab, &.lg .g-tab {

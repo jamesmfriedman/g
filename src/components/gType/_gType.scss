@@ -140,6 +140,14 @@ h1, h2, h3, h4, h5, h6 {
     @include text-label;
 }
 
+.text-link {
+    color: $g-color-link;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 .color-link {
     color: $g-color-link;
 }

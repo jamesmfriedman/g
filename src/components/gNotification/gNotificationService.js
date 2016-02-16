@@ -22,7 +22,7 @@ angular.module('G.notification').service('gNotifications', function($document, $
 	function gNotification(title, config) {
 		
 		// set our properties
-		for (key in config) {
+		for (var key in config) {
 			this[key] = config[key];
 		}
 
@@ -46,8 +46,7 @@ angular.module('G.notification').service('gNotifications', function($document, $
 	           }
 	        }
 	    };
-	};
-
+	}
 
 	var api = {
 		native: false,

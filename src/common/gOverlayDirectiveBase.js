@@ -79,7 +79,7 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					body.addClass('g-' + overlayType + '-open');
 
 					if (scope.params.clickToClose) {
-						body.one('click', clickToCloseHandler);
+						body.one('click touchstart', clickToCloseHandler);
 					}
 					
 				};

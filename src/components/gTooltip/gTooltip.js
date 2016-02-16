@@ -1,4 +1,4 @@
-angular.module('G.tooltip').directive('gTooltip', function($compile, $rootScope, $animate) {
+angular.module('G.tooltip').directive('gTooltip', function($compile, $document, $rootScope, $animate) {
 	return {
 		restrict: 'A',
 
@@ -10,6 +10,9 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $rootScope,
 			var timeout;
 			var tooltipScope;
 			var tooltipEl;
+			var body = angular.element($document[0].body);
+			var isTouchEvent;
+
 			el.attr('title', '');
 
 			constructor();
@@ -27,11 +30,19 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $rootScope,
 				
 				
 				el.on('mouseenter touchstart', function(evt){
-					createTooltip();
-					timeout = setTimeout(function(){showTip(evt);}, 500);
+					
+					//blocks the mouse enter event from firing if we are already in a touch event
+					if (isTouchEvent) return; 
+
+					isTouchEvent = evt.type === 'touchstart';
+					el.one('mouseleave touchend touchcancel', hideTip);
+					body.one('touchend touchcancel', hideTip);
+
+					if (!timeout) {
+						createTooltip();
+						timeout = setTimeout(function(){showTip(evt);}, 500);
+					}
 				});
-				
-				el.on('mouseleave touchend touchcancel', hideTip);
 			}
 
 			function createTooltip() {
@@ -48,7 +59,14 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $rootScope,
 			}
 
 			function hideTip(evt) {
+				// wait a 100 ms before we actually cancel the touch event
+				// otherwise our touch will create a mousenter
+				setTimeout(function(){
+					isTouchEvent = false;
+				}, 100); 
+				
 				if (timeout) clearTimeout(timeout);
+				timeout = undefined;
 				tooltipScope[as].hide(evt, el);
 				tooltipScope.$digest();
 				tooltipEl.remove();

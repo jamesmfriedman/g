@@ -7,10 +7,6 @@ angular.module('G.checkbox', []).directive('gCheckbox', function() {
 		link: function(scope, el, attrs) {
 			var input = el.find('input');
 			input.after('<span class="checkbox"></span>');
-			el.on('touchstart', function(evt){
-				input.prop('checked', !input.prop('checked'));
-				evt.preventDefault();
-			});
 		},
 		controller: function($scope) {
 

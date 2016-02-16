@@ -109,8 +109,12 @@ g-input-group, .g-input-group {
 		}
 
 		input:not(:checked) + .checkbox {
-			background-color: #fafafa;
+			background-color: rgba(0,0,0,.02);
 		}
+	}
+
+	&.alt .checkbox {
+		background-color: rgba(0,0,0,.02);
 	}
 
 	.checkbox {
@@ -122,6 +126,7 @@ g-input-group, .g-input-group {
 		border-radius: $g-border-radius;
 		position: absolute;
 		left:0;
+		margin-top: -1px;
 
 		&:before {
 			content:'';
@@ -133,7 +138,7 @@ g-input-group, .g-input-group {
 			margin-top: -2px;
 			border-bottom: 3px solid $g-color-success-text;
 			border-right: 3px solid $g-color-success-text;
-			transform: translate(-50%, -50%) rotate(45deg) scale(0);
+			transform: translate3d(-50%, -50%, 0) rotate(45deg) scale(0);
 			transition: .3s;
 		}
 	}
@@ -153,7 +158,7 @@ g-input-group, .g-input-group {
 		border-color: $g-color-success-border;
 
 		&:before {
-			transform: translate(-50%, -50%) rotate(45deg) scale(1);
+			transform: translate3d(-50%, -50%, 0) rotate(45deg) scale(1);
 		}
 	}
 }

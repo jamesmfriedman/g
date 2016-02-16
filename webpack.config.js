@@ -38,10 +38,6 @@ var config = module.exports = {
                 loader: 'url'
             },
 			{
-		        test: /\.scss$/,
-		        loaders: ['style/url', 'file?name=[name].css?[hash]', 'autoprefixer', 'sass', 'import-glob']
-		    },
-			{
 				test: /\.html$/,
 				loader: 'ng-cache'
 	      	}
@@ -66,6 +62,11 @@ if (procName == 'webpack-dev-server') {
 	config.entry['docs'].unshift('webpack-dev-server/client?http://' + HOST + ':' + PORT);
 	config.entry['docs'].unshift('webpack/hot/dev-server');
 	config.plugins.unshift(new webpack.HotModuleReplacementPlugin());
+
+	config.module.loaders.push({
+        test: /\.scss$/,
+        loaders: ['style/url', 'file?name=[name].css?[hash]', 'autoprefixer', 'sass', 'import-glob']
+    });
 	
 	//conf
 	config.devServer = {
@@ -81,6 +82,11 @@ if (procName == 'webpack-dev-server') {
 
 // build
 else {
+	config.module.loaders.push({
+        test: /\.scss$/,
+        loaders: ['file?name=[name].css?[hash]', 'autoprefixer', 'sass', 'import-glob']
+    });
+
 	config.plugins = config.plugins.concat([
 		new ngAnnotatePlugin({
             add: true
