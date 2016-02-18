@@ -1,4 +1,4 @@
-angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout) {
+angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 	return {
 		restrict: 'E',
 		scope: {},
@@ -11,13 +11,35 @@ angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout
 			};
 		},
 
-		controller: function($scope, $element) {
+		controller: function($scope, $element, $window) {
 			$ctrl = this;
 			var tabs = {};
 			var highlight = $element.find('g-tab-highlight');
 			var highlightStyle = $window.getComputedStyle(highlight[0]);
+			var lastTab;
+			var win = angular.element($window);
+
+			$ctrl._register = register;
+			$ctrl._setHighlight = setHighlight;
+			$ctrl.activate = activate;
+
+			constructor();
+
+			function constructor() {
+				win.on('resize', resizeHandler);
+
+				$scope.$on('$destroy', function(){
+					win.off('resize', resizeHandler);
+				});
+			}
+
+			function resizeHandler() {
+				if (lastTab) {
+					setHighlight(lastTab);
+				}
+			}
 			
-			$ctrl.activate = function(name) {
+			function activate(name) {
 				for (var key in tabs) {
 					if (key === name) {
 						tabs[key].activate();
@@ -27,13 +49,15 @@ angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout
 						$ctrl[key] = false;
 					}
 				}
-			};
+			}
 
-			$ctrl._register = function(name, ctrl) {
+			function register(name, ctrl) {
 				tabs[name] = ctrl;
-			};
+			}
 
-			$ctrl._setHighlight = function(currentTab) {
+			function setHighlight(currentTab) {
+				lastTab = currentTab;
+
 				var props = {
 					visibility: 'visible'
 				};
@@ -45,11 +69,9 @@ angular.module('G.tabs').directive('gTabs', function($window, gHelpers, $timeout
 					props.width = currentTab[0].offsetWidth - parseInt(highlightStyle.marginLeft) - parseInt(highlightStyle.marginRight) + 'px';
 					props.transform = props['-webkit-transform'] = props['-moz-transform'] = props['-ms-transform'] = 'translateX(' + currentTab[0].offsetLeft + 'px)';
 				}
-
-				//console.log(currentTab, props);
-				
+			
 				highlight.css(props);
-			};
+			}
 		}
 	};
 });

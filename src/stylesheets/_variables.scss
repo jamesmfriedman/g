@@ -33,3 +33,11 @@ $g-color-success-text: white !default;
 $g-color-highlight: #03A8F2 !default;
 
 $g-easing-outBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+$g-grid-breakpoints: (
+  xs: 0,
+  sm: 544px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;

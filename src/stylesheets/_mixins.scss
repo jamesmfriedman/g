@@ -79,7 +79,7 @@
     }
 }
 
-@mixin gFadeInOut {
+@mixin g-fade-in-out {
     /***
      * Animations
      */
@@ -102,6 +102,70 @@
     }
 }
 
-@mixin gTouchHighlight($color: rgba(0,0,0,0)) {
+@mixin g-touch-highlight($color: rgba(0,0,0,0)) {
     -webkit-tap-highlight-color: $color;
+}
+
+/***********************************************************************************************************************
+ * Responsive Helpers
+ ***********************************************************************************************************************/ 
+@mixin screen-xs {
+    @media (min-width: map-get($g-grid-breakpoints, 'xs')) {
+        @content;
+    }
+}
+
+@mixin screen-sm {
+    @media (min-width: map-get($g-grid-breakpoints, 'sm')) {
+        @content;
+    }
+}
+
+@mixin screen-md {
+    @media (min-width: map-get($g-grid-breakpoints, 'md')) {
+        @content;
+    }
+}
+
+@mixin screen-lg {
+    @media (min-width: map-get($g-grid-breakpoints, 'lg')) {
+        @content;
+    }
+}
+
+@mixin screen-xl {
+    @media (min-width: map-get($g-grid-breakpoints, 'xl')) {
+        @content;
+    }
+}
+
+
+@mixin screen-xs-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'xs')) and (max-width: map-get($g-grid-breakpoints, 'sm')) {
+        @content;
+    }
+}
+
+@mixin screen-sm-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'sm')) and (max-width: map-get($g-grid-breakpoints, 'md')) {
+        @content;
+    }
+}
+
+@mixin screen-md-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'md')) and (max-width: map-get($g-grid-breakpoints, 'lg')) {
+        @content;
+    }
+}
+
+@mixin screen-lg-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'lg')) and (max-width: map-get($g-grid-breakpoints, 'xl')) {
+        @content;
+    }
+}
+
+@mixin screen-xl-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'xl')) {
+        @content;
+    }
 }

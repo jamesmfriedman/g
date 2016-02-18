@@ -1,7 +1,7 @@
 g-badge, .g-badge {
 	@include text-label;
-	@include gFadeInOut;
-	@include gTouchHighlight;
+	@include g-fade-in-out;
+	@include g-touch-highlight;
 
 	text-transform: uppercase;
 	white-space: nowrap;
