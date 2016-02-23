@@ -1,3 +1,6 @@
+/*********************************************************************************
+ * Base Input Styles
+ *********************************************************************************/
 .g-input {
 	border: 1px solid $g-color-default-border;
 	border-radius: $g-border-radius;
@@ -50,6 +53,32 @@
 	width: 60rem;
 }
 
+/*********************************************************************************
+ * Appended text
+ *********************************************************************************/
+g-input-prefix, g-input-suffix {
+	@include text-secondary;
+	@include text-caption;
+
+	height: $g-size-md;
+	min-width: $g-size-md;
+	flex: 0 1 auto;
+	padding: 0 2rem;
+	line-height: $g-size-md;
+	border: 1px solid $g-color-default-border;
+	border-left: 0;
+	border-radius: $g-border-radius;
+
+	&.lg {
+		height: $g-size-lg;
+		line-height: $g-size-lg;
+		min-width: $g-size-lg;
+	}
+}
+
+/*********************************************************************************
+ * Form label
+ *********************************************************************************/
 .g-form-label {
 	@include text-label;
 	margin-bottom: 2rem;
@@ -60,6 +89,11 @@
 	text-overflow: ellipsis;
 }
 
+/*********************************************************************************
+ * File Input
+ *********************************************************************************/
+
+// a file input that can live inside a clickable button or area
 .g-input-masked-file {
 	position: absolute;
 	top:0;
@@ -70,6 +104,9 @@
 	cursor: pointer;
 }
 
+/*********************************************************************************
+ * Input Groups
+ *********************************************************************************/
 g-input-group, .g-input-group {
 	display: flex;
 	position: relative;
@@ -86,20 +123,28 @@ g-input-group, .g-input-group {
 		margin-left:-1px;
 	}
 
-	.g-input:first-child, g-input:first-child {
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
+	.g-input, g-input-prefix, .g-input-prfiex, g-input-suffix, .g-input-suffix {
+		&:first-child {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
 	}
 
-	.g-input:last-child, g-input:last-child {
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
+	.g-input, g-input-prefix, .g-input-prfiex, g-input-suffix, .g-input-suffix {
+		&:last-child {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
 	}
 }
 
+/*********************************************************************************
+ * Checkboxes
+ *********************************************************************************/
 .g-checkbox {
+	display: inline-block;
 	cursor: pointer;
-	padding-left: $g-size-xs + 2rem;
+	padding-left: $g-size-xs + 3rem;
 	position: relative;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	
@@ -126,7 +171,7 @@ g-input-group, .g-input-group {
 		border-radius: $g-border-radius;
 		position: absolute;
 		left:0;
-		margin-top: -1px;
+		transition: .3s;
 
 		&:before {
 			content:'';

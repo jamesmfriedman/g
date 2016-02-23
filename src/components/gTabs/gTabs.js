@@ -3,7 +3,7 @@ angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 		restrict: 'E',
 		scope: {},
 		compile: function(tEl, tAttrs) {
-			var highlight = angular.element('<g-tab-highlight></g-tab-highlight>');
+			var highlight = angular.element('<g-tab-highlight class="no-transition"></g-tab-highlight>');
 			tEl.prepend(highlight);
 
 			return function(scope, el, attrs, ctrl) {
@@ -18,6 +18,7 @@ angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 			var highlightStyle = $window.getComputedStyle(highlight[0]);
 			var lastTab;
 			var win = angular.element($window);
+			var resizeTimeout;
 
 			$ctrl._register = register;
 			$ctrl._setHighlight = setHighlight;
@@ -34,8 +35,14 @@ angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 			}
 
 			function resizeHandler() {
+				if (resizeTimeout) clearTimeout(resizeTimeout);
+
 				if (lastTab) {
+					highlight.addClass('no-transition');
 					setHighlight(lastTab);
+					resizeTimeout = setTimeout(function(){
+						highlight.removeClass('no-transition');
+					}, 100);
 				}
 			}
 			
@@ -56,8 +63,6 @@ angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 			}
 
 			function setHighlight(currentTab) {
-				lastTab = currentTab;
-
 				var props = {
 					visibility: 'visible'
 				};
@@ -71,6 +76,14 @@ angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 				}
 			
 				highlight.css(props);
+
+				if (!lastTab) {
+					setTimeout(function(){
+						highlight.removeClass('no-transition');
+					});
+				}
+				
+				lastTab = currentTab;
 			}
 		}
 	};

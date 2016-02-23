@@ -3,70 +3,60 @@
     font-weight: 300;
     line-height: 128px;
     letter-spacing: -5px;
-    @include g-text-styles();
 }
 
 @mixin text-display-3 {
     font-size: 56px;
     font-weight: 400;
     line-height: 64px;
-    @include g-text-styles();
 }
 
 @mixin text-display-2 {
     font-size: 45px;
     font-weight: 400;
     line-height: 64px;
-    @include g-text-styles();
 }
 
 @mixin text-display-1 {
     font-size: 34px;
     font-weight: 400;
     line-height: 52px;
-    @include g-text-styles();
 }
 
 @mixin text-headline {
     font-size: 24px;
     font-weight: 400;
-    line-height: 44px;
-    @include g-text-styles();
+    line-height: 1.6;
 }
 
 @mixin text-title {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5;
-    @include g-text-styles();
 }
 
 @mixin text-subhead {
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
-    @include g-text-styles();
 }
 
 @mixin text-body {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.6;
-    @include g-text-styles();
 }
 
 @mixin text-caption {
     font-size: 12px;
     font-weight: 400;
     line-height: 1.6;
-    @include g-text-styles();
 }
 
 @mixin text-menu {
     font-size: 14px;
     font-weight: 600;
     line-height: 32px;
-    @include g-text-styles();
 }
 
 @mixin text-label {
@@ -75,7 +65,6 @@
     text-transform: uppercase;
     letter-spacing: .5px;
     font-weight: 600;
-    @include g-text-styles();
 }
 
 body {
@@ -98,46 +87,57 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-display-4 {
     @include text-display-4;
+    @include g-text-styles();
 }
 
 .text-display-3 {
     @include text-display-3;
+    @include g-text-styles();
 }
 
 .text-display-2 {
     @include text-display-2;
+    @include g-text-styles();
 }
 
 .text-display-1 {
     @include text-display-1;
+    @include g-text-styles();
 }
 
 .text-headline {
     @include text-headline;
+    @include g-text-styles();
 }
 
 .text-title {
     @include text-title;
+    @include g-text-styles();
 }
 
 .text-subhead {
     @include text-subhead;
+    @include g-text-styles();
 }
 
 .text-body {
     @include text-body;
+    @include g-text-styles();
 }
 
 .text-caption {
     @include text-caption;
+    @include g-text-styles();
 }
 
 .text-menu {
     @include text-menu;
+    @include g-text-styles();
 }
 
 .text-label {
     @include text-label;
+    @include g-text-styles();
 }
 
 .text-link {

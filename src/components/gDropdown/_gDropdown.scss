@@ -19,7 +19,7 @@ g-dropdown {
 		}
 
 		&.ng-hide-add-active, &.ng-hide-remove-active, &.ng-enter, &.ng-leave {
-			transition: .2s all $g-easing-outBack;
+			transition: .2s all $g-ease-out-back;
 		}
 
 		&.ng-hide-remove, &.ng-hide-add.ng-hide-add-active, &.ng-enter, &.ng-leave.ng-leave-active { 

@@ -1,0 +1,86 @@
+/***********************************************************************************************************************
+ * Responsive Mixins
+ ***********************************************************************************************************************/ 
+@mixin screen-xs {
+    @media (min-width: map-get($g-grid-breakpoints, 'xs') + 1) {
+        @content;
+    }
+}
+
+@mixin screen-sm {
+    @media (min-width: map-get($g-grid-breakpoints, 'sm') + 1) {
+        @content;
+    }
+}
+
+@mixin screen-md {
+    @media (min-width: map-get($g-grid-breakpoints, 'md') + 1) {
+        @content;
+    }
+}
+
+@mixin screen-lg {
+    @media (min-width: map-get($g-grid-breakpoints, 'lg') + 1) {
+        @content;
+    }
+}
+
+@mixin screen-xl {
+    @media (min-width: map-get($g-grid-breakpoints, 'xl') + 1) {
+        @content;
+    }
+}
+
+
+@mixin screen-xs-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'xs')) and (max-width: map-get($g-grid-breakpoints, 'sm')) {
+        @content;
+    }
+}
+
+@mixin screen-sm-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'sm')) and (max-width: map-get($g-grid-breakpoints, 'md')) {
+        @content;
+    }
+}
+
+@mixin screen-md-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'md')) and (max-width: map-get($g-grid-breakpoints, 'lg')) {
+        @content;
+    }
+}
+
+@mixin screen-lg-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'lg')) and (max-width: map-get($g-grid-breakpoints, 'xl')) {
+        @content;
+    }
+}
+
+@mixin screen-xl-only {
+    @media (min-width: map-get($g-grid-breakpoints, 'xl')) {
+        @content;
+    }
+}
+
+/***********************************************************************************************************************
+ * Responsive Helpers
+ ***********************************************************************************************************************/ 
+.hide-xs {
+    @include screen-xs-only { display: none !important; }
+}
+
+.hide-sm {
+    @include screen-sm-only { display: none !important; }
+}
+
+.hide-md {
+    @include screen-md-only { display: none !important; }   
+}
+
+.hide-lg {
+    @include screen-lg-only { display: none !important; }      
+}
+
+.hide-xl {
+    @include screen-xl-only { display: none !important; }
+}

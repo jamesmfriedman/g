@@ -55,7 +55,7 @@ g-tab, .g-tab {
 	vertical-align: middle;
 	height: $g-size-md;
 	line-height: $g-size-md;
-	padding: 0 $g-size-md / 2;
+	padding: 0 $g-size-sm / 2;
 	cursor: pointer;
 	transition: .3s;
 	color: inherit;
@@ -80,4 +80,8 @@ g-tab-highlight, .g-tab-highlight {
 	background-color: $g-color-highlight;
 	left:0px;
 	visibility: hidden;
+
+	&.no-transition {
+		transition: none;
+	}
 }
