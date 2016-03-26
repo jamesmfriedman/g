@@ -10,7 +10,7 @@ angular.module('G.common').service('gHelpers', function($animate) {
 				scope.$parent[attrs.as] = ctrl;
 			}
 		}
-	};
+	}
 
 	/**
 	 * Makes an element animatable
@@ -24,10 +24,25 @@ angular.module('G.common').service('gHelpers', function($animate) {
 		} else {
 			$animate.enabled(el, true);	
 		}
-	};
+	}
+
+	function makeTouchable(el) {
+		el.on('touchstart', function(){
+            el.addClass('touch');
+        });
+
+        el.on('touchmove', function(){
+            el.removeClass('touch').addClass('touchmove');
+        });
+
+        el.on('touchend touchcancel', function(){
+            el.removeClass('touch touchmove');
+        });
+	}
 	
 	return {
 		directiveApiLink: directiveApiLink,
-		makeAnimatable: makeAnimatable
-	}
+		makeAnimatable: makeAnimatable,
+		makeTouchable: makeTouchable
+	};
 });

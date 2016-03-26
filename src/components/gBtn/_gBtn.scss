@@ -11,9 +11,13 @@
 	background-color: $background-color;
 	border-color: $border-color;
 
-	&:hover {
+	&:hover, &.touch {
 		background-color: darken($background-color, 5%);
 		border-color: darken($border-color, 5%);
+	}
+
+	&.touch {
+		opacity: .5;
 	}
 
 	&.alt, &.flat {
@@ -30,7 +34,7 @@
 		border-color: transparent;
 	}
 
-	&:active {
+	&:active, &.touch {
 		transform: translateY(1px);
 	}
 
@@ -44,7 +48,7 @@ g-btn, .g-btn {
 	padding: calc((#{$g-size-md} - 1em) / 2 - 1px) 3rem;
 	border-radius: $g-border-radius;
 	border: 1px solid $g-color-default-border;
-	transition: background .3s, color .3s, padding-left .3s, padding-right .3s, border-color .3s;
+	transition: opacity .3s, background .3s, color .3s, padding-left .3s, padding-right .3s, border-color .3s;
 	min-width: $g-size-md;
 	position: relative;
 	vertical-align: middle;

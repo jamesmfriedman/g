@@ -14,6 +14,7 @@ angular.module('G', [
 	'G.toggle',
 	'G.avatar',
 	'G.checkbox',
+	'G.touch'
 ]);
 
 require('./g.scss');
@@ -26,6 +27,7 @@ require('./common/gOverlayDirectiveBase');
 require('./common/gPosition');
 
 require('./components/gBtn');
+require('./components/gTouch');
 require('./components/gToggle');
 require('./components/gDropdown');
 require('./components/gForms');

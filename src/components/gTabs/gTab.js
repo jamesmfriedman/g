@@ -21,7 +21,7 @@ angular.module('G.tabs').directive('gTab', function() {
 				$ctrl.name = $attrs.name || $element.text();
 				tabCtrl._register($ctrl.name, $ctrl);
 
-				$element.on('click touchstart', function(){
+				$element.on('click touchend', function(){
 					tabCtrl.activate($ctrl.name);
 					$scope.$applyAsync();
 				});

@@ -7,7 +7,7 @@ var app = angular.module('G.docs', [
 	'G.docs.controllers'
 ]);
 
-var IS_DEV = hosts.indexOf(window.location.hostname) == -1;
+var IS_DEV = hosts.indexOf(window.location.hostname) === -1;
 
 /**
  * Setup some app configuration options
@@ -60,7 +60,7 @@ app.run(function($rootScope, gConfig, $timeout) {
 			$timeout(function(){
 				angular.merge(obj, {name: 'James Friedman', src:'img/_me.jpg'});
 				obj.watch = false;
-			}, 1000)		
+			}, 1000);		
 		}
 		
 
