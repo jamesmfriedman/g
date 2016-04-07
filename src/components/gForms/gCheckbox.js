@@ -1,4 +1,4 @@
-angular.module('G.checkbox', []).directive('gCheckbox', function() {
+angular.module('G.forms').directive('gCheckbox', function() {
 	return {
 		restrict: 'E',
 		replace: true,

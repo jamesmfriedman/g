@@ -13,8 +13,8 @@ angular.module('G', [
 	'G.notification',
 	'G.toggle',
 	'G.avatar',
-	'G.checkbox',
-	'G.touch'
+	'G.touch',
+	'G.forms',
 ]);
 
 require('./g.scss');

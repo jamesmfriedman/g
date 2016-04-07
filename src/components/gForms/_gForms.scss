@@ -100,8 +100,36 @@ g-input-prefix, g-input-suffix {
 	right:0;
 	bottom:0;
 	left:0;
+	width: 100%;
+	height: 100%;
 	opacity:0;
 	cursor: pointer;
+}
+
+/*********************************************************************************
+ * Clearable Inputs
+ *********************************************************************************/
+.g-clearable-input-control {
+	position: absolute;
+	right: 0;
+
+	&.#{$g-animate-classname} {
+		&.ng-hide-add, &.ng-hide-remove {
+			transition: 0s all;
+		}
+
+		&.ng-hide-add-active, &.ng-hide-remove-active {
+			transition: .3s opacity;
+		}
+
+		&.ng-hide-remove, &.ng-hide-add.ng-hide-add-active { 
+			opacity: 0; 
+		}
+		
+		&.ng-hide-add, &.ng-hide-remove.ng-hide-remove-active { 
+			opacity: 1 ;
+		}
+	}
 }
 
 /*********************************************************************************
