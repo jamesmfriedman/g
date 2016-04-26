@@ -43,6 +43,8 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $document, 
 						timeout = setTimeout(function(){showTip(evt);}, 500);
 					}
 				});
+
+				scope.$on('$destroy', destroy);
 			}
 
 			function createTooltip() {
@@ -70,6 +72,17 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $document, 
 				tooltipScope[as].hide(evt, el);
 				tooltipScope.$digest();
 				tooltipEl.remove();
+				tooltipEl = null;
+			}
+
+			function destroy() {
+				if (tooltipEl) {
+					tooltipEl.remove();
+				}
+
+				tooltipEl = null;
+				body = null;
+				el = null;
 			}
 		},
 		controller: function($scope) {

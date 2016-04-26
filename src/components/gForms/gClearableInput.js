@@ -7,6 +7,7 @@ angular.module('G.forms').directive('gClearableInput', function($compile, gHelpe
 			
 			childScope.clearInputValue = function() {
 				ngModelCtrl.$setViewValue('', 'gClearableInput');
+				ngModelCtrl.$render();
 				el[0].focus();
 			};
 

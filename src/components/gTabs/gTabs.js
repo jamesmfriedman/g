@@ -12,7 +12,7 @@ angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 		},
 
 		controller: function($scope, $element, $window) {
-			$ctrl = this;
+			var $ctrl = this;
 			var tabs = {};
 			var highlight = $element.find('g-tab-highlight');
 			var highlightStyle = $window.getComputedStyle(highlight[0]);
@@ -28,10 +28,15 @@ angular.module('G.tabs').directive('gTabs', function(gHelpers) {
 
 			function constructor() {
 				win.on('resize', resizeHandler);
+				$scope.$on('$destroy', destroy);
+			}
 
-				$scope.$on('$destroy', function(){
-					win.off('resize', resizeHandler);
-				});
+			function destroy() {
+				win.off('resize', resizeHandler);
+				win = null;
+				lastTab = null;
+				$element = null;
+				highlight = null;
 			}
 
 			function resizeHandler() {

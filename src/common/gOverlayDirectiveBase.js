@@ -12,10 +12,10 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 				gHelpers.directiveApiLink(scope, el, attrs, ctrl);
 				gHelpers.makeAnimatable(el, attrs);
 
-				scope.params = scope.params || {};
-				scope.params.clickToClose = scope.params.clickToClose === undefined ? true : scope.params.clickToClose;
+				var params = scope.params || {};
+				params.clickToClose = params.clickToClose === undefined ? true : params.clickToClose;
 
-				overlayPostionMode = scope.params.positionMode || overlayPostionMode;
+				overlayPostionMode = params.positionMode || overlayPostionMode;
 				defaultPosition = defaultPosition || ['bottom', 'center'];
 
 				var win = angular.element($window);
@@ -25,23 +25,21 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 				var scrollParents;
 				var originalEl = el;
 
-				var init = function() {
+				constructor();
+
+				function constructor() {
 					position = getRequestedPositionParams();
 					ctrl.on('show', showHandler);
 					ctrl.on('hide', hideHandler);
 					body.append(el);
 
-					scope.$on('$destroy', function(evt){
-						hideHandler(evt);
-						el.remove();
-						originalEl.remove();
-					});
-				};
+					scope.$on('$destroy', destroy);
+				}
 
-				var getRequestedPositionParams = function() {
+				function getRequestedPositionParams() {
 					var pos;
-					if (scope.params && scope.params.position) {
-						pos = scope.params.position.split(' ');
+					if (params && params.position) {
+						pos = params.position.split(' ');
 
 						var x = ['top', 'bottom', 'left', 'right', 'center'];
 						var y = ['left', 'center', 'right', 'top', 'bottom'];
@@ -59,9 +57,10 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					}
 
 					return [pos[0], pos[1]];
-				};
+				}
 
-				var showHandler = function(evt, originalEvent, showEl, origin) {
+				function showHandler(evt, originalEvent, showEl, origin) {
+					el = null;
 					el = showEl; //redefine the el for ngIf, sicne ngIf makes new ones everytime
 					
 					if (origin) {
@@ -69,6 +68,8 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					} else if (originalEvent.target) {
 						currentOrigin = angular.element(originalEvent.target);
 					}
+
+					el[0].scrollTop = 0;
 					
 					currentOrigin ? el.addClass('g-' + overlayType + '-has-origin') : el.removeClass('g-' + overlayType + '-has-origin');
 					scrollParents = getScrollParents(currentOrigin || body);				
@@ -78,38 +79,38 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					positionChangeHandler();
 					body.addClass('g-' + overlayType + '-open');
 
-					if (scope.params.clickToClose) {
+					if (params.clickToClose) {
 						body.one('click touchstart', clickToCloseHandler);
 					}
 					
-				};
+				}
 
-				var hideHandler = function(evt) {
+				function hideHandler(evt) {
 					win.off('resize', positionChangeHandler);
 					body.off('click', clickToCloseHandler);
 					if (scrollParents) scrollParents.off('scroll', positionChangeHandler);
 					
 					scrollParents = null;
 
-					if (evt.name == 'hide' || evt.name == '$destroy' && scope.showing) {
+					if (evt.name === 'hide' || evt.name === '$destroy' && scope.showing) {
 						body.removeClass('g-' + overlayType + '-open');
 					}
-				};	
+				}
 
-				var positionChangeHandler = function() {
+				function positionChangeHandler() {
 					gPosition(currentOrigin, el, position[0], position[1], overlayPostionMode);
-				};
+				}
 
-				var clickToCloseHandler = function() {
+				function clickToCloseHandler(evt) {
 					ctrl.hide();
-				};
+				}
 
 				/**
 				 * a utility function for getting all of the elements that are scrollable up to the root node
 				 * scroll events dont bubble, so we bind to every scrollable element
 				 * This was rewritten from jQuery UIs scrollParent() method
 				 */ 
-				var getScrollParents = function(el) {
+				function getScrollParents(el) {
 					var style = win[0].getComputedStyle(el[0]);
 					var position = style.getPropertyValue('position');
 					var parents = [];
@@ -122,7 +123,7 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 
 					var docNode = parents.shift(); //get rid of the document node, we dont need it for our filtering function
 
-					excludeStaticParent = position === 'absolute',
+					var excludeStaticParent = position === 'absolute',
 					parents = parents.filter(function(parent) {
 						var parentStyle = win[0].getComputedStyle(parent);
 						if ( excludeStaticParent &&  style.getPropertyValue('position') === 'static' ) {
@@ -133,9 +134,20 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 
 					parents.unshift(docNode);
 					return position === 'fixed' || !parents.length ? angular.element(document) : angular.element(parents);
-				};
+				}
 
-				init();
+				function destroy(evt) {
+					hideHandler(evt);
+					el.remove();
+					originalEl.remove();
+					
+					win = null;
+					body = null;
+					currentOrigin = null;
+					scrollParents = null;
+					originalEl = null;
+					el = null;
+				}
 			},
 			controller: 'ShowHideController'
 		};

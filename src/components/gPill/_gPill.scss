@@ -29,4 +29,8 @@
 		@include g-pill-mixin($g-color-success-text, $g-color-success-bg, $g-color-success-border);
 	}
 
+	.g-btn-close {
+		margin: -3rem -3rem -3rem -2rem;
+		top: -.25rem;
+	}
 }

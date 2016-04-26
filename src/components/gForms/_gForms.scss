@@ -45,12 +45,28 @@
 	}
 }
 
+// update a selects color based on its value. The value is set in gSelect.js
+.g-input-select[value=""] {
+	color: rgba(0,0,0,.5);
+}
+
 .g-input-textarea {
 	vertical-align: top;
 	padding-top: ($g-size-md - 3.75rem * 1.5) / 2;
 	padding-bottom: ($g-size-md - 3.75rem * 1.5) / 2;
 	line-height: 1.5;
 	width: 60rem;
+}
+
+/*********************************************************************************
+ * Placeholder text
+ *********************************************************************************/
+.g-input:not(input):not(textarea):not(select)[placeholder] {
+	&:after {
+		content: attr(placeholder);
+		opacity: .5;
+		display: inline-block;
+	}
 }
 
 /*********************************************************************************
@@ -66,14 +82,25 @@ g-input-prefix, g-input-suffix {
 	padding: 0 2rem;
 	line-height: $g-size-md;
 	border: 1px solid $g-color-default-border;
-	border-left: 0;
 	border-radius: $g-border-radius;
+
+	&.alt {
+		background-color: rgba(0,0,0,.02);
+	}
 
 	&.lg {
 		height: $g-size-lg;
 		line-height: $g-size-lg;
 		min-width: $g-size-lg;
 	}
+}
+
+g-input-suffix {
+	border-left: 0;
+}
+
+g-input-prefix {
+	border-right: 0;
 }
 
 /*********************************************************************************
@@ -175,6 +202,9 @@ g-input-group, .g-input-group {
 	padding-left: $g-size-xs + 3rem;
 	position: relative;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-column-break-inside: avoid; /* Chrome, Safari */
+    page-break-inside: avoid;           /* Theoretically FF 20+ */
+    break-inside: avoid-column; 
 	
 	&:hover, &:focus {
 		.checkbox {
@@ -199,6 +229,7 @@ g-input-group, .g-input-group {
 		border-radius: $g-border-radius;
 		position: absolute;
 		left:0;
+		top: -1px;
 		transition: .3s;
 
 		&:before {

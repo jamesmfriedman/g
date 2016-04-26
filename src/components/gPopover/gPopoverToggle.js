@@ -1,4 +1,4 @@
-angular.module('G.popover').directive('gPopoverToggle', function($document) {
+angular.module('G.popover').directive('gPopoverToggle', function($document, $window) {
 	return {
 		restrict: 'A',
 		scope: {
@@ -9,28 +9,38 @@ angular.module('G.popover').directive('gPopoverToggle', function($document) {
 			var activation = scope.params && scope.params.activation ? scope.params.activation : 'hover';
 			var popoverEl = null;
 
-			var init = function() {
-				popoverCtrl = scope.$parent[attrs.gPopoverToggle];
+			constructor();
 
-				if (activation == 'click') {
-					el.on('click', toggle);
-				} else {
-					el.on('mouseenter', show);
-					el.on('mouseleave', hide);
-				};
-			};
+			function constructor() {
+				$window.requestAnimationFrame(function(){
+					popoverCtrl = scope.$parent[attrs.gPopoverToggle];
+					if (activation === 'click') {
+						el.on('click', toggle);
+					} else {
+						el.on('mouseenter', show);
+						el.on('mouseleave', hide);
+					}
+				});
 
-			var show = function(evt) {
+				$scope.$on('$destroy', destroy);
+			}
+
+			function destroy() {
+				el = null;
+				popoverEl = null;
+			}
+
+			function show(evt) {
 				popoverCtrl.show(evt, el);
-				scope.$apply();
+				scope.$applyAsync();
 
 				if (popoverEl) {
 					popoverEl.off('mouseleave', hide);
 					popoverEl = null;
 				}
-			};
+			}
 
-			var hide = function(evt) {
+			function hide(evt) {
 				var toEl = angular.element(evt.toElement);
 
 				if (toEl.attr('as') === attrs.gPopoverToggle) {
@@ -40,15 +50,13 @@ angular.module('G.popover').directive('gPopoverToggle', function($document) {
 				}
 
 				popoverCtrl.hide(evt, el);
-				scope.$apply();
-			};
+				scope.$applyAsync();
+			}
 
-			var toggle = function() {
+			function toggle() {
 				popoverCtrl.toggle(el);
-				scope.$apply();
-			};
-
-			setTimeout(init);
+				scope.$applyAsync();
+			}
 		}
 	};
 });

@@ -7,6 +7,11 @@ angular.module('G.forms').directive('gCheckbox', function() {
 		link: function(scope, el, attrs) {
 			var input = el.find('input');
 			input.after('<span class="checkbox"></span>');
+
+			scope.$on('$destroy', function(){
+				input = null;
+				el = null;
+			});
 		},
 		controller: function($scope) {
 

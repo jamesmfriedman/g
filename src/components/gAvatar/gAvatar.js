@@ -12,26 +12,31 @@ mod.directive('gAvatar', function() {
 			params: '=params'
 		},
 		controller: 'gAvatarController',
-		controllerAs: 'gAvatar'
+		controllerAs: 'gAvatar',
+		link: function(scope, el) {
+			el.attr('itemscope', '');
+			el.attr('itemtype', 'https://schema.org/ImageObject');
+		}
 	};
 });
 
-mod.controller('gAvatarController', function($scope, gConfig) {
+mod.controller('gAvatarController', function($scope, $element, gConfig) {
 	var $ctrl = this;
+	var imgEl = angular.element($element[0].querySelector('.g-avatar-img'));
 	$ctrl.avatar = {};
-	$ctrl.style = {};
-	
+		
 	var unbind = $scope.$watch('gAvatar.params', function(params){
 		if (params === undefined) {
 			return;
 		}
 
 		angular.merge($ctrl.avatar, gConfig.getAvatar(params));
-		
 		$ctrl.avatar.initials = parseInitials($ctrl.avatar.initials, $ctrl.avatar.name);
 
 		if ($ctrl.avatar.src) {
-			$ctrl.style['background-image'] = 'url(' + $ctrl.avatar.src + ')';
+			imgEl.css('background-image', 'url(' + $ctrl.avatar.src + ')');
+			imgEl.addClass('in');
+			imgEl.attr('content', $ctrl.avatar.src);
 		}
 
 		if (!$ctrl.avatar.watch) {
@@ -54,4 +59,12 @@ mod.controller('gAvatarController', function($scope, gConfig) {
 			return initials.toUpperCase();
 		}
 	}
+
+	$scope.$on('destroy', function(){
+		imgEl = null;
+		$element = null;
+		if (unbind) {
+			unbind();
+		}
+	});
 });

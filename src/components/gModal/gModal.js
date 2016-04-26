@@ -16,7 +16,9 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 			scope.params = scope.params || {};
 			scope.params.clickToClose = scope.params.clickToClose === undefined ? true : scope.params.clickToClose;
 
-			var init = function() {
+			constructor();
+
+			function constructor() {
 				if (attrs.as) {
 					gModals._register(attrs.as, ctrl);
 				}
@@ -24,20 +26,27 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 				ctrl.on('show', showHandler);
 				ctrl.on('hide', hideHandler);
 
-				scope.$on('$destroy', function(evt){
-					hideHandler(evt);
-					el.remove();
-					if (attrs.as) {
-						gModals._unregister(attrs.as);
-					}
-				});
-			};
+				scope.$on('$destroy', destroy);
+			}
 
-			var clickToCloseHandler = function(evt) {
+			function destroy(evt) {
+				hideHandler(evt);
+				el.remove();
+				if (attrs.as) {
+					gModals._unregister(attrs.as);
+				}
+
+				el = null;
+				parent = null;
+				body = null;
+			}
+
+			function clickToCloseHandler(evt) {
 				ctrl.hide();
-			};
+			}
 
-			var showHandler = function(evt, originalEvent, showEl, origin) {
+			function showHandler(evt, originalEvent, showEl, origin) {
+				el.off();
 				el = showEl; //redefine the el for ngIf, since ngIf makes new ones everytime
 				body.append(el);
 				
@@ -50,19 +59,16 @@ angular.module('G.modal').directive('gModal', function($controller, $document, $
 				if (scope.params.clickToClose) {
 					body.one('click touchstart', clickToCloseHandler);
 				}
-				
-			};
+			}
 
-			var hideHandler = function(evt) {
+			 function hideHandler(evt) {
 				el.one('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function(){
 					parent.append(el);
 				});
 				
 				gModals._remove(ctrl);
 				body.off('click touchstart', clickToCloseHandler);
-			};
-
-			init();	
+			}
 		},
 		controller: 'ShowHideController'
 

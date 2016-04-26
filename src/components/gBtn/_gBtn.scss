@@ -11,7 +11,9 @@
 	background-color: $background-color;
 	border-color: $border-color;
 
-	&:hover, &.touch {
+	// &:hover, 
+
+	&.touch {
 		background-color: darken($background-color, 5%);
 		border-color: darken($border-color, 5%);
 	}
@@ -25,9 +27,9 @@
 		background-color: $alt-background;
 		color: $alt-color;
 		
-		&:hover {
-			background-color: $alt-hover-background;
-		}
+		// &:hover {
+		// 	background-color: $alt-hover-background;
+		// }
 	}
 
 	&.flat {
@@ -145,7 +147,25 @@ g-btn, .g-btn {
 	}
 
 	&.g-btn-close {
-		font-size: 6rem;
+
+		span:only-child {
+			opacity: .5;
+
+			&:after, &:before {
+				content: '';
+				position: absolute;
+				background-color: $g-color-close-btn;
+				left: 50%;
+				top: 50%;
+				width: 4rem;
+				transform: translate(-50%, -50%) rotate(45deg);
+				height: .5rem;
+			}
+
+			&:before {
+				transform: translate(-50%, -50%) rotate(-45deg);
+			}
+		}
 	}
 }
 

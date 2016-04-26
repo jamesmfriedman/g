@@ -8,7 +8,7 @@ angular.module('G.dropdown').directive('gDropdownToggle', function($document) {
 				dropdownCtrl = scope[attrs.gDropdownToggle];
 				el.on('click', function(evt){
 					dropdownCtrl.toggle(evt, el);
-					scope.$apply();
+					scope.$applyAsync();
 				});
 			};
 

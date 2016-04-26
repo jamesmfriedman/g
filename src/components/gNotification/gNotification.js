@@ -8,14 +8,13 @@ angular.module('G.notification').directive('gNotification', function(gHelpers, $
 			params: '='
 		},
 		link: function(scope, el, attrs) {
-			var notification;
 			var unbind;
 			gHelpers.makeAnimatable(el, attrs);
 
 			if (scope.params.constructor.name !== 'gNotification') {
 			
 				unbind = scope.$watch('params', function(val){
-					var config = angular.merge({}, val);
+					var config = angular.extend({}, val);
 					config.native = false;
 					scope.notification = gNotifications.create(config.title, config);
 				}, true);
@@ -37,5 +36,5 @@ angular.module('G.notification').directive('gNotification', function(gHelpers, $
 				}
 			};
 		}
-	}
+	};
 });
