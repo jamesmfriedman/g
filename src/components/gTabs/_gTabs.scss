@@ -51,6 +51,7 @@ g-tabs, .g-tabs {
 }
 
 g-tab, .g-tab {
+	@include text-btn;
 	display: inline-block;
 	vertical-align: middle;
 	height: $g-size-md;
@@ -60,11 +61,7 @@ g-tab, .g-tab {
 	transition: .3s;
 	color: inherit;
 	text-decoration: none;
-	letter-spacing: .25rem;
-	text-transform: uppercase;
-	font-weight: 600;
-	font-size: 3rem;
-	opacity: .5;
+	opacity: .4;
 
 	&.active {
 		opacity: 1;

@@ -1,3 +1,99 @@
+@mixin text-default {
+    color: rgba(0,0,0,.8);
+}
+
+@mixin text-secondary {
+    color: rgba(0,0,0,.5); 
+}
+
+@mixin text-tertiary {
+    color: rgba(0,0,0,.3); 
+}
+
+@mixin text-inverse-default {
+    color: rgba(255,255,255,1);
+}
+
+@mixin text-inverse-secondary {
+    color: rgba(255,255,255,.8);
+}
+
+@mixin text-inverse-tertiary {
+    color: rgba(255,255,255,.5); 
+}
+
+@mixin color-default {
+    color: rgba(0,0,0,.8);
+}
+
+@mixin color-secondary {
+    color: rgba(0,0,0,.5); 
+}
+
+@mixin color-tertiary {
+    color: rgba(0,0,0,.3); 
+}
+
+@mixin color-inverse-default {
+    color: rgba(255,255,255,1);
+}
+
+@mixin color-inverse-secondary {
+    color: rgba(255,255,255,.8);
+}
+
+@mixin color-inverse-tertiary {
+    color: rgba(255,255,255,.5); 
+}
+
+@mixin g-text-styles() {
+    @include text-default;
+
+    &.inherit-color {
+        color: inherit;
+    }
+
+    &.secondary {
+        @include text-secondary;
+    }
+
+    &.tertiary {
+        @include text-tertiary;
+    }
+
+    &.inverse {
+        @include text-inverse-default;
+
+        &.secondary {
+            @include text-inverse-secondary;            
+        }
+
+        &.tertiary {
+            @include text-inverse-tertiary;               
+        }
+    }
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
+
+    &.line-through {
+        text-decoration: line-through;
+    }
+
+    &.danger {
+        color: $g-color-danger-bg; 
+    }
+
+    &.success {
+        color: $g-color-success-bg;
+    }
+}
+
 @mixin text-display-4 {
     font-size: 112px;
     font-weight: 300;
@@ -25,14 +121,20 @@
 
 @mixin text-headline {
     font-size: 24px;
-    font-weight: 400;
-    line-height: 1.6;
+    font-weight: 600;
+    line-height: 1.5;
 }
 
 @mixin text-title {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5;
+}
+
+@mixin text-lead {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
 }
 
 @mixin text-subhead {
@@ -59,12 +161,20 @@
     line-height: 32px;
 }
 
+@mixin text-btn {
+    font-size: 12px;
+    letter-spacing: .25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
 @mixin text-label {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.5;
     text-transform: uppercase;
-    letter-spacing: .5px;
-    font-weight: 600;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 
 body {
@@ -83,6 +193,33 @@ h1, h2, h3, h4, h5, h6 {
     margin:0;
 }
 
+.color-default {
+    @include color-default;
+}
+
+.color-secondary {
+    @include color-secondary;   
+}
+
+.color-tertiary {
+    @include color-tertiary;
+}
+
+.color-inverse {
+    @include color-inverse-default;
+}
+
+.color-inverse-secondary {
+    @include color-inverse-secondary;   
+}
+
+.color-inverse-tertiary {
+    @include color-inverse-tertiary;
+}
+
+.color-inherit {
+    color: inherit;
+}
 
 
 .text-display-4 {
@@ -115,6 +252,11 @@ h1, h2, h3, h4, h5, h6 {
     @include g-text-styles();
 }
 
+.text-lead {
+    @include text-lead;
+    @include g-text-styles();
+}
+
 .text-subhead {
     @include text-subhead;
     @include g-text-styles();
@@ -132,6 +274,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-menu {
     @include text-menu;
+    @include g-text-styles();
+}
+
+.text-btn {
+    @include text-btn;
     @include g-text-styles();
 }
 

@@ -48,6 +48,7 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $document, 
 			}
 
 			function createTooltip() {
+				if (!title) return;
 				tooltipScope = scope.$new();
 				tooltipScope.title = title;
 				tooltipEl = $compile('<g-tooltip-overlay class="g-tooltip-overlay" params="{positionMode: \'swap\'}" ng-if="'+ show +'" as="'+ as +'">{{ title }}</g-tooltip-overlay>')(tooltipScope);
@@ -71,8 +72,11 @@ angular.module('G.tooltip').directive('gTooltip', function($compile, $document, 
 				timeout = undefined;
 				tooltipScope[as].hide(evt, el);
 				tooltipScope.$digest();
-				tooltipEl.remove();
-				tooltipEl = null;
+				
+				if (tooltipEl) {
+					tooltipEl.remove();
+					tooltipEl = null;
+				}
 			}
 
 			function destroy() {

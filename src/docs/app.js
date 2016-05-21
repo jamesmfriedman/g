@@ -1,4 +1,4 @@
-var hosts = ['git.empdev.domo.com'];
+var hosts = [''];
 var app = angular.module('G.docs', [
 	'ngAnimate',
 	'ngSanitize',
