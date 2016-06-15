@@ -5,7 +5,7 @@
 <div class="container">
 <g-btn ng-click="testModal.toggle()">Test</g-btn>
     
-    <g-modal ng-if="testModal.showing" as="testModal">
+    <g-modal ng-if="testModal.showing" as="testModal" ng-cloak>
         <g-modal-header>
             <h1 class="text-title">Modal</h1>
             <g-btn class="alt" g-modal-hide>

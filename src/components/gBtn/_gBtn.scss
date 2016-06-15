@@ -13,23 +13,15 @@
 
 	// &:hover, 
 
-	&.touch {
-		background-color: darken($background-color, 5%);
-		border-color: darken($border-color, 5%);
-	}
-
-	&.touch {
-		opacity: .5;
-	}
 
 	&.alt, &.flat {
 		border-color: $alt-border-color;
 		background-color: $alt-background;
 		color: $alt-color;
 		
-		// &:hover {
-		// 	background-color: $alt-hover-background;
-		// }
+		&.active {
+			background-color: rgba(0,0,0,.07);
+		}
 	}
 
 	&.flat {
@@ -42,6 +34,14 @@
 
 	&:focus {
 		outline: none;
+	}
+	
+	&.touch {
+		opacity: .5;
+	}
+
+	&.active {
+		background-color: darken($background-color, 5%);
 	}
 }
 
@@ -118,9 +118,8 @@ g-btn, .g-btn {
 	/**
 	 * Icons
 	 */
-	& > [g-icon] {
+	& [g-icon] {
 		max-height:3px;
-		color: inherit;
 		
 		&:before {
 			line-height:0;

@@ -42,11 +42,12 @@ g-modal {
 	border-radius: $g-border-radius;
 
 	&.#{$g-animate-classname} {
+
 		&.ng-enter, &.ng-leave, &.ng-hide-add, &.ng-hide-remove {
 			transition: .3s;
 		}
 
-		&.ng-enter, &.ng-leave.ng-leave-active, &.ng-hide-remove, &.ng-hide-add.ng-hide-add-active {
+		&.ng-enter-prepare, &.ng-enter, &.ng-leave.ng-leave-active, &.ng-hide-remove, &.ng-hide-add.ng-hide-add-active {
 			opacity: 0;
 			transform: translate(-50%, -45%);
 		}

@@ -1,15 +1,14 @@
-angular.module('G.common').service('gHelpers', function($animate) {
+angular.module('G.common').service('gHelpers', function($animate, $parse) {
 	/**
 	 * To be executed inside of a link function
 	 */
 	function directiveApiLink(scope, el, attrs, ctrl) {
 		if ('as' in attrs) {
-			if (typeof scope.$parent[attrs.as] === 'object') {
-				angular.merge(scope.$parent[attrs.as], ctrl);
-			} else {
-				scope.$parent[attrs.as] = ctrl;
-			}
+			$parse(attrs.as).assign(scope.$parent, ctrl);
+			return attrs.as;
 		}
+
+		return false;
 	}
 
 	/**
@@ -17,8 +16,9 @@ angular.module('G.common').service('gHelpers', function($animate) {
 	 */
 	function makeAnimatable(el, attrs) {
 		el.addClass('animate');
+		attrs = attrs || {};
 		
-		if (attrs.ngIf) {
+		if (attrs.ngIf || attrs.ngSwitchWhen) {
 			$animate.enabled(el, true);
 			$animate.enter(el, el.parent(), el);
 		} else {

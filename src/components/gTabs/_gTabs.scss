@@ -8,13 +8,30 @@ g-tabs, .g-tabs {
 	// horizontal tabs
 	text-align: center;	
 	box-shadow: 0 -1px 0 0 $g-color-default-border inset;
+	overflow-y: hidden;
 	overflow-x: auto;
+	height: $g-size-md;
+	line-height: $g-size-md;
+
+	&.lg {
+		height: $g-size-lg;
+		line-height: $g-size-lg;
+
+		g-tab, .g-tab {
+			height: $g-size-lg;
+			line-height: $g-size-lg;
+			padding: 0 $g-size-lg / 2;
+		}
+	}
 
 	// vertical tabs
 	&.g-tabs-vertical {
 		text-align: left;
 		box-shadow: -1px 0 0 $g-color-default-border inset;
 		overflow-y: auto;
+		overflow-x: hidden;
+		height: auto;
+		line-height: auto;
 		
 		.g-tab {
 			display: block;
@@ -25,11 +42,6 @@ g-tabs, .g-tabs {
 		}
 	}
 
-	&.lg g-tab, &.lg .g-tab {
-		height: $g-size-lg;
-		line-height: $g-size-lg;
-		padding: 0 $g-size-lg / 2;
-	}
 
 	&.alt g-tab, &.alt .g-tab {
 		text-transform: none;
@@ -65,6 +77,11 @@ g-tab, .g-tab {
 
 	&.active {
 		opacity: 1;
+	}
+
+	&.lg {
+		height: $g-size-lg;
+		line-height: $g-size-lg;
 	}
 }
 

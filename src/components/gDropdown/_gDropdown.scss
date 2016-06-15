@@ -7,7 +7,7 @@ g-dropdown {
 	padding: $g-size-md / 2;
 	z-index: 1001;
 	overflow-y: auto;
-	transform: translate3d(0);
+	transform: translate3d(0,0,0);
 
 	&.g-dropdown-has-origin {
 		position: fixed;

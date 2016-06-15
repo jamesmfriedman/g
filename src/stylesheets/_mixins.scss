@@ -32,3 +32,181 @@
 @mixin g-touch-highlight($color: rgba(0,0,0,0)) {
     -webkit-tap-highlight-color: $color;
 }
+
+@mixin text-default {
+    color: rgba(0,0,0,.8);
+}
+
+@mixin text-secondary {
+    color: rgba(0,0,0,.5); 
+}
+
+@mixin text-tertiary {
+    color: rgba(0,0,0,.3); 
+}
+
+@mixin text-inverse-default {
+    color: rgba(255,255,255,1);
+}
+
+@mixin text-inverse-secondary {
+    color: rgba(255,255,255,.8);
+}
+
+@mixin text-inverse-tertiary {
+    color: rgba(255,255,255,.5); 
+}
+
+@mixin color-default {
+    color: rgba(0,0,0,.8);
+}
+
+@mixin color-secondary {
+    color: rgba(0,0,0,.5); 
+}
+
+@mixin color-tertiary {
+    color: rgba(0,0,0,.3); 
+}
+
+@mixin color-inverse-default {
+    color: rgba(255,255,255,1);
+}
+
+@mixin color-inverse-secondary {
+    color: rgba(255,255,255,.8);
+}
+
+@mixin color-inverse-tertiary {
+    color: rgba(255,255,255,.5); 
+}
+
+@mixin g-text-styles() {
+
+    &.inherit-color {
+        color: inherit;
+    }
+
+    &.secondary {
+        @include text-secondary;
+    }
+
+    &.tertiary {
+        @include text-tertiary;
+    }
+
+    &.inverse {
+        @include text-inverse-default;
+
+        &.secondary {
+            @include text-inverse-secondary;            
+        }
+
+        &.tertiary {
+            @include text-inverse-tertiary;               
+        }
+    }
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
+
+    &.line-through {
+        text-decoration: line-through;
+    }
+
+    &.danger {
+        color: $g-color-danger-bg; 
+    }
+
+    &.success {
+        color: $g-color-success-bg;
+    }
+}
+
+@mixin text-display-4 {
+    font-size: 112px;
+    font-weight: 300;
+    line-height: 128px;
+    letter-spacing: -5px;
+}
+
+@mixin text-display-3 {
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 64px;
+}
+
+@mixin text-display-2 {
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 64px;
+}
+
+@mixin text-display-1 {
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 52px;
+}
+
+@mixin text-headline {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+@mixin text-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+@mixin text-lead {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+@mixin text-subhead {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+@mixin text-body {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+@mixin text-caption {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+@mixin text-menu {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+@mixin text-btn {
+    font-size: 12px;
+    letter-spacing: .25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+@mixin text-label {
+    font-size: 11px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}

@@ -62,6 +62,31 @@
     }
 }
 
+
+@mixin screen-xs-max {
+    @media (max-width: map-get($g-grid-breakpoints, 'sm')) {
+        @content;
+    }
+}
+
+@mixin screen-sm-max {
+    @media (max-width: map-get($g-grid-breakpoints, 'md')) {
+        @content;
+    }
+}
+
+@mixin screen-md-max {
+    @media (max-width: map-get($g-grid-breakpoints, 'lg')) {
+        @content;
+    }
+}
+
+@mixin screen-lg-max {
+    @media (max-width: map-get($g-grid-breakpoints, 'xl')) {
+        @content;
+    }
+}
+
 /***********************************************************************************************************************
  * Responsive Helpers
  ***********************************************************************************************************************/ 

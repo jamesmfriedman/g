@@ -1,22 +1,21 @@
-angular.module('G.common').factory('gOverlayDirectiveBase', function($document, $window, gHelpers, gPosition) {
-	return function(overlayType, overlayPostionMode, defaultPosition) {
+angular.module('G.common').factory('gOverlayDirectiveBase', function($document, $window, gHelpers, gPosition, $timeout) {
+	return function(overlayType, opts) {
+		// opts
+		// overlayPostionMode, 
+		// defaultPosition, 
+		// registry
+		// stopPropgation
 
 		return {
 			restrict: 'E',
 			priority: 601,
-			scope: {
-				params: '=?',
-				ngIf: '&?'
-			},
+			scope: {},
 			link: function(scope, el, attrs, ctrl) {
-				gHelpers.directiveApiLink(scope, el, attrs, ctrl);
-				gHelpers.makeAnimatable(el, attrs);
-
 				var params = scope.params || {};
 				params.clickToClose = params.clickToClose === undefined ? true : params.clickToClose;
 
-				overlayPostionMode = params.positionMode || overlayPostionMode;
-				defaultPosition = defaultPosition || ['bottom', 'center'];
+				var overlayPostionMode = params.positionMode || opts.overlayPostionMode;
+				var defaultPosition = opts.defaultPosition || ['bottom', 'center'];
 
 				var win = angular.element($window);
 				var body = angular.element($document[0].body);
@@ -28,12 +27,27 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 				constructor();
 
 				function constructor() {
+					var apiName = gHelpers.directiveApiLink(scope, el, attrs, ctrl);
+					gHelpers.makeAnimatable(el, attrs);
+
+					if (apiName && opts.registry) {
+						opts.registry._register(apiName, ctrl);
+					}
+
 					position = getRequestedPositionParams();
 					ctrl.on('show', showHandler);
 					ctrl.on('hide', hideHandler);
 					body.append(el);
 
 					scope.$on('$destroy', destroy);
+
+					if (attrs.ngIf || attrs.ngSwitchWhen) {
+						scope.$watch(function(){return ctrl.showing;}, function(val){
+							if (val && originalEl.next()[0]) {
+								gHelpers.makeAnimatable(originalEl.next(), attrs);
+							}
+						});
+					}
 				}
 
 				function getRequestedPositionParams() {
@@ -60,10 +74,9 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 				}
 
 				function showHandler(evt, originalEvent, showEl, origin) {
-					el = null;
 					el = showEl; //redefine the el for ngIf, sicne ngIf makes new ones everytime
 					
-					if (origin) {
+					if (origin !== undefined) {
 						currentOrigin = origin;
 					} else if (originalEvent.target) {
 						currentOrigin = angular.element(originalEvent.target);
@@ -77,11 +90,22 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					win.on('resize', positionChangeHandler);
 
 					positionChangeHandler();
-					body.addClass('g-' + overlayType + '-open');
+
+					if (opts.stopPropagation) {
+						el.on('click touchstart', function(evt){
+							evt.stopPropagation();
+						});
+					}
 
 					if (params.clickToClose) {
 						body.one('click touchstart', clickToCloseHandler);
 					}
+
+					// defer the adding of the class. 
+					// This prevents a bug where show and hide are called in the same frame and hide removes the class
+					$window.requestAnimationFrame(function(){
+						body.addClass('g-' + overlayType + '-open');
+					});
 					
 				}
 
@@ -133,7 +157,7 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					});
 
 					parents.unshift(docNode);
-					return position === 'fixed' || !parents.length ? angular.element(document) : angular.element(parents);
+					return position === 'fixed' || !parents.length ? angular.element($document) : angular.element(parents);
 				}
 
 				function destroy(evt) {
@@ -149,7 +173,60 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					el = null;
 				}
 			},
-			controller: 'ShowHideController'
+			controller: function($scope, $element) {
+				var $ctrl = this;
+
+				$ctrl.showing = false;
+				$ctrl.show = show;
+				$ctrl.hide = hide;
+				$ctrl.toggle = toggle;
+				$ctrl.on = on;
+
+				$ctrl.params = {};
+
+				/**
+				 * Get the element, ng-if returns a comment, so we have to get the next node
+				 */
+				function getElement() {
+					if ($element[0].nodeName === '#comment') {
+						return $element.next();
+					} else {
+						return $element;
+					}
+				}
+
+				function updateParams(params) {
+					Object.assign($ctrl.params, params || {});
+				}
+
+				function show(evt, origin, params) {
+					updateParams(params);
+					evt = evt || {};
+					$ctrl.showing = true;
+					$scope.$evalAsync();
+
+					$timeout(function(){
+						$scope.$emit('show', evt, getElement(), origin);
+					});
+
+				}
+
+				function hide(evt, origin, params) {
+					updateParams(params);
+					evt = evt || {};
+					$ctrl.showing = false;
+					$scope.$evalAsync();
+					$scope.$emit('hide', evt, getElement(), origin);
+				}
+
+				function toggle(evt, origin, params) {
+					$ctrl.showing ? $ctrl.hide(evt, origin, params) : $ctrl.show(evt, origin, params);
+				}
+
+				function on(evt, cb) {
+					$scope.$on(evt, cb);
+				}
+			}
 		};
 	};
 });

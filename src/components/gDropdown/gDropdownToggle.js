@@ -1,14 +1,10 @@
-angular.module('G.dropdown').directive('gDropdownToggle', function($document) {
+angular.module('G.dropdown').directive('gDropdownToggle', function(gDropdowns) {
 	return {
 		restrict: 'A',
 		link: function(scope, el, attrs) {
-			var dropdownCtrl;
-
 			var init = function() {
-				dropdownCtrl = scope[attrs.gDropdownToggle];
 				el.on('click', function(evt){
-					dropdownCtrl.toggle(evt, el);
-					scope.$applyAsync();
+					gDropdowns[attrs.gDropdownToggle].toggle(evt, el);
 				});
 			};
 
