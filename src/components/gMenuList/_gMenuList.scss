@@ -1,8 +1,24 @@
 g-menu-list, .g-menu-list {
 	display: block;
+    margin: 0 0 44px 0;
+    padding: 0;
+    border-bottom: 1px solid $g-color-default-border;
+
+    & + g-menu-list {
+    	margin-top: $g-size-md;
+    }
+}
+
+g-menu-list-label {
+	@include text-label;
+	@include color-secondary;
+	display: block;
+	padding: 0 ($g-size-sm / 2);
+	line-height: $g-size-sm;
 }
 
 g-menu-list-item, .g-menu-list-item {
+	background-color: white;
 	@include text-body;
 	height: $g-size-md;
 	line-height: $g-size-md;
@@ -10,9 +26,15 @@ g-menu-list-item, .g-menu-list-item {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: block;
-	padding: 0 $g-size-md / 2;
+	padding: 0 $g-size-sm / 2;
 	cursor: pointer;
 	text-decoration: none;
+    text-align: left;
+    border-top: 1px solid $g-color-default-border;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
 }
 
 g-dropdown, .g-dropdown {
@@ -27,4 +49,25 @@ g-dropdown, .g-dropdown {
 			margin-bottom: -($g-size-md / 4)	
 		}
 	}
+}
+
+
+g-menu-list-item-icon, .g-menu-list-item-icon {
+    width: $g-size-sm;
+    height: $g-size-sm;
+    line-height: $g-size-sm;
+    margin-right: 2rem;
+    text-align: center;
+
+    g-avatar {
+    	font-size: $g-size-sm;
+    }
+}
+
+g-menu-list-item-label, .g-menu-list-item-label {
+	flex: 1 0 auto;
+}
+
+g-menu-list-item-actions, .g-menu-list-item-actions {
+	flex: 0 1 auto;
 }

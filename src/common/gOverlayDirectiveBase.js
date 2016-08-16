@@ -19,10 +19,12 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 
 				var win = angular.element($window);
 				var body = angular.element($document[0].body);
+
 				var position;
 				var currentOrigin;
 				var scrollParents;
 				var originalEl = el;
+				var watchers = [];
 
 				constructor();
 
@@ -35,8 +37,8 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					}
 
 					position = getRequestedPositionParams();
-					ctrl.on('show', showHandler);
-					ctrl.on('hide', hideHandler);
+					watchers.push(ctrl.on('show', showHandler));
+					watchers.push(ctrl.on('hide', hideHandler));
 					body.append(el);
 
 					scope.$on('$destroy', destroy);
@@ -83,7 +85,6 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					}
 
 					el[0].scrollTop = 0;
-					
 					currentOrigin ? el.addClass('g-' + overlayType + '-has-origin') : el.removeClass('g-' + overlayType + '-has-origin');
 					scrollParents = getScrollParents(currentOrigin || body);				
 					scrollParents.on('scroll', positionChangeHandler);
@@ -92,13 +93,13 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					positionChangeHandler();
 
 					if (opts.stopPropagation) {
-						el.on('click touchstart', function(evt){
+						el.on('click touchend', function(evt){
 							evt.stopPropagation();
 						});
 					}
 
 					if (params.clickToClose) {
-						body.one('click touchstart', clickToCloseHandler);
+						body.one('click touchend', clickToCloseHandler);
 					}
 
 					// defer the adding of the class. 
@@ -110,8 +111,8 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 				}
 
 				function hideHandler(evt) {
-					win.off('resize', positionChangeHandler);
-					body.off('click', clickToCloseHandler);
+					if (win) win.off('resize', positionChangeHandler);
+					if (body) body.off('click', clickToCloseHandler);
 					if (scrollParents) scrollParents.off('scroll', positionChangeHandler);
 					
 					scrollParents = null;
@@ -164,6 +165,8 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 					hideHandler(evt);
 					el.remove();
 					originalEl.remove();
+
+					watchers.forEach(function(cb){cb();});
 					
 					win = null;
 					body = null;
@@ -224,7 +227,7 @@ angular.module('G.common').factory('gOverlayDirectiveBase', function($document, 
 				}
 
 				function on(evt, cb) {
-					$scope.$on(evt, cb);
+					return $scope.$on(evt, cb);
 				}
 			}
 		};

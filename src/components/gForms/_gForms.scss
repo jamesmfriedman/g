@@ -18,6 +18,15 @@
 		background-color: rgba(0,0,0,.02);
 	}
 
+	&.flat {
+		background-color: transparent;
+		border: 0;
+
+		&:focus {
+			background-color: rgba(0,0,0,.02);
+		}
+	}
+
 	&:focus {
 		//box-shadow: 0 0 3px $g-color-highlight;
 		border-color: $g-color-highlight;
@@ -72,13 +81,13 @@
 /*********************************************************************************
  * Appended text
  *********************************************************************************/
-g-input-prefix, g-input-suffix {
+g-input-prefix, .g-input-prefix, g-input-suffix, .g-input-suffix {
 	@include text-secondary;
 	@include text-caption;
 
 	height: $g-size-md;
 	min-width: $g-size-md;
-	flex: 0 1 auto;
+	flex: 0 0 auto;
 	padding: 0 2rem;
 	line-height: $g-size-md;
 	border: 1px solid $g-color-default-border;
@@ -88,6 +97,10 @@ g-input-prefix, g-input-suffix {
 		background-color: rgba(0,0,0,.02);
 	}
 
+	&.flat {
+		border: 0;
+	}
+
 	&.lg {
 		height: $g-size-lg;
 		line-height: $g-size-lg;
@@ -95,11 +108,11 @@ g-input-prefix, g-input-suffix {
 	}
 }
 
-g-input-suffix {
+g-input-suffix, .g-input-suffix {
 	border-left: 0;
 }
 
-g-input-prefix {
+g-input-prefix, .g-input-prefix {
 	border-right: 0;
 }
 
@@ -165,6 +178,16 @@ g-input-prefix {
 g-input-group, .g-input-group {
 	display: flex;
 	position: relative;
+	align-items: center;
+
+	.g-input {
+		flex: 1 1;
+	}
+
+	.g-form-label {
+		margin-bottom: 0;
+		margin-right: 2rem;
+	}
 
 	.g-input:focus {
 		position: relative; //fixes an issues where the focused input needs to be above the other one
@@ -199,12 +222,14 @@ g-input-group, .g-input-group {
 .g-checkbox {
 	display: inline-block;
 	cursor: pointer;
+	padding: 1px 0;
 	padding-left: $g-size-xs + 3rem;
 	position: relative;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-column-break-inside: avoid; /* Chrome, Safari */
     page-break-inside: avoid;           /* Theoretically FF 20+ */
     break-inside: avoid-column; 
+    transform: translateZ(0);
 	
 	&:hover, &:focus {
 		.checkbox {
@@ -229,7 +254,7 @@ g-input-group, .g-input-group {
 		border-radius: $g-border-radius;
 		position: absolute;
 		left:0;
-		top: -1px;
+		top: 0px;
 		transition: .3s;
 
 		&:before {
@@ -263,6 +288,15 @@ g-input-group, .g-input-group {
 
 		&:before {
 			transform: translate3d(-50%, -50%, 0) rotate(45deg) scale(1);
+		}
+	}
+
+	&.flat input:checked + .checkbox {
+		background-color: transparent;
+		border-color: transparent;
+
+		&:before {
+			border-color: $g-color-success-bg;
 		}
 	}
 }

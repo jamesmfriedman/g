@@ -3,6 +3,7 @@ angular.module('G', [
 	'G.btn',
 	'G.dropdown',
 	'G.icon',
+	'G.ink',
 	'G.popover',
 	'G.tooltip',
 	'G.modal',
@@ -32,6 +33,7 @@ require('./components/gToggle');
 require('./components/gDropdown');
 require('./components/gForms');
 require('./components/gIcon');
+require('./components/gInk');
 require('./components/gMenuList');
 require('./components/gModal');
 require('./components/gPopover');

@@ -1,0 +1,37 @@
+@keyframes g-ink-blob {
+    from {
+        opacity: .07;
+        transform: translate(-50%, -50%) scale(0, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1, 1);
+    }
+}
+
+g-ink {
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    overflow: hidden;
+    border-radius: inherit;
+    transform: translateZ(0);
+
+    g-ink-blob {
+        animation: g-ink-blob 1 1s both;
+        position: absolute;
+        background-color: black;
+        width: 300%;
+        padding-top: 300%;
+        border-radius: 50%;
+        display: block;
+        pointer-events: none;
+    }
+}
+
+[disabled] g-ink {
+    display: none;
+}

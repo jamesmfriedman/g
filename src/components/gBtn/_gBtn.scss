@@ -95,6 +95,37 @@ g-btn, .g-btn {
 		border-radius: 9999px;
 	}
 
+	&.overflow {
+		white-space: nowrap;
+		width: $g-size-md;
+		padding-left: 0;
+		padding-right: 0;
+		
+
+		&.lg {
+			width: $g-size-lg;
+		}
+
+		& > [g-icon] {
+			margin-right: 0 !important;
+		}
+		
+		& > span {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			left: calc(100% + 2rem);			
+			text-align: left;
+			line-height: 1.3;
+		}
+	}
+
+	&.lowercase {
+		text-transform: none;
+		letter-spacing: 0;
+		font-weight: normal;
+	}
+
 	/**
 	 * Disabled
 	 */
@@ -115,10 +146,32 @@ g-btn, .g-btn {
 		}
 	}
 
+
+	&.g-btn-close {
+		span {
+			opacity: .5;
+
+			&:after, &:before {
+				content: '';
+				position: absolute;
+				background-color: $g-color-close-btn;
+				left: 50%;
+				top: 50%;
+				width: 4rem;
+				transform: translate(-50%, -50%) rotate(45deg);
+				height: .5rem;
+			}
+
+			&:before {
+				transform: translate(-50%, -50%) rotate(-45deg);
+			}
+		}
+	}
+	
 	/**
 	 * Icons
 	 */
-	& [g-icon] {
+	[g-icon] {
 		max-height:3px;
 		
 		&:before {
@@ -142,26 +195,8 @@ g-btn, .g-btn {
 		}
 	}
 
-	&.g-btn-close {
-
-		span:only-child {
-			opacity: .5;
-
-			&:after, &:before {
-				content: '';
-				position: absolute;
-				background-color: $g-color-close-btn;
-				left: 50%;
-				top: 50%;
-				width: 4rem;
-				transform: translate(-50%, -50%) rotate(45deg);
-				height: .5rem;
-			}
-
-			&:before {
-				transform: translate(-50%, -50%) rotate(-45deg);
-			}
-		}
+	g-ink {
+	
 	}
 }
 

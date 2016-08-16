@@ -1,1 +1,2 @@
-module.exports = require('./gMenuList');
+angular.module('G.menuList', []);
+require('./gMenuListItem');
