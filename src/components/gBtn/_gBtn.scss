@@ -171,6 +171,16 @@ g-btn, .g-btn {
 	/**
 	 * Icons
 	 */
+	&.g-icon-btn {
+		max-width: $g-size-md;
+		padding-left: 0;
+		padding-right: 0;
+
+		&.lg {
+			max-width: $g-size-lg;			
+		}
+	}
+
 	[g-icon] {
 		max-height:3px;
 		
@@ -179,20 +189,20 @@ g-btn, .g-btn {
 			vertical-align: top;
 		}
 
-		&:not(:only-child) {
-			&:first-child {
-				margin-right: 1rem;
-			}
+		// &:not(:only-child) {
+		// 	&:first-child {
+		// 		margin-right: 1rem;
+		// 	}
 
-			&:last-child {
-				margin-left: 1rem;
-			}
-		}
+		// 	&:last-child {
+		// 		margin-left: 1rem;
+		// 	}
+		// }
 
-		&:only-child {
-			margin-left: -1.5rem;
-			margin-right: -1.5rem;
-		}
+		// &:only-child {
+		// 	margin-left: -1.5rem;
+		// 	margin-right: -1.5rem;
+		// }
 	}
 
 	g-ink {
